@@ -2,6 +2,7 @@
 
 import { Dialog, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { ScrollArea } from 'components/ui/scroll-area';
 import { Collection } from 'lib/shopify/types';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
@@ -95,135 +96,137 @@ export default function MobileMenu({
                       Home
                     </Link>
                   </li>
-                  <Accordion type="multiple">
-                    <AccordionItem value="item-1">
-                      <AccordionTrigger>Our Products</AccordionTrigger>
-                      <AccordionContent>
-                        <Accordion type="multiple" className="w-full">
-                          <AccordionItem value="item-1">
-                            <AccordionTrigger>Gold</AccordionTrigger>
-                            <AccordionContent>
-                              <ul>
-                                {goldCategories.map(
-                                  (component: {
-                                    title: string;
-                                    path: string | undefined;
-                                    description: string | null | undefined;
-                                  }) => {
-                                    if (component.title === 'All') return;
-                                    return (
-                                      <Link
-                                        key={component.title}
-                                        title={component.title}
-                                        href={component.path || '/'}
-                                        className="group w-full "
-                                      >
-                                        <li className=" rounded-md p-1 group-hover:border-2 group-hover:border-solid group-hover:border-orange-300 group-hover:text-orange-300">
-                                          {component.title}
-                                        </li>
-                                      </Link>
-                                    );
-                                  }
-                                )}
-                              </ul>
-                            </AccordionContent>
-                          </AccordionItem>
-                          <AccordionItem value="item-2">
-                            <AccordionTrigger>Diamond</AccordionTrigger>
-                            <AccordionContent>
-                              <ul>
-                                {diamondCategories.map(
-                                  (component: {
-                                    title: string;
-                                    path: string | undefined;
-                                    description: string | null | undefined;
-                                  }) => {
-                                    if (component.title === 'All') return;
-                                    return (
-                                      <Link
-                                        key={component.title}
-                                        title={component.title}
-                                        href={component.path || '/'}
-                                        className="group w-full "
-                                      >
-                                        <li className=" rounded-md p-1 group-hover:border-2 group-hover:border-solid group-hover:border-orange-300 group-hover:text-orange-300">
-                                          {component.title}
-                                        </li>
-                                      </Link>
-                                    );
-                                  }
-                                )}
-                              </ul>
-                            </AccordionContent>
-                          </AccordionItem>
-                          <AccordionItem value="item-3">
-                            <AccordionTrigger>Silver</AccordionTrigger>
-                            <AccordionContent>
-                              <ul>
-                                {silverCategories.map(
-                                  (component: {
-                                    title: string;
-                                    path: string | undefined;
-                                    description: string | null | undefined;
-                                  }) => {
-                                    if (component.title === 'All') return;
-                                    return (
-                                      <Link
-                                        key={component.title}
-                                        title={component.title}
-                                        href={component.path || '/'}
-                                        className="group w-full "
-                                      >
-                                        <li className=" rounded-md p-1 group-hover:border-2 group-hover:border-solid group-hover:border-orange-300 group-hover:text-orange-300">
-                                          {component.title}
-                                        </li>
-                                      </Link>
-                                    );
-                                  }
-                                )}
-                              </ul>
-                            </AccordionContent>
-                          </AccordionItem>
-                          <AccordionItem value="item-4">
-                            <AccordionTrigger>Men&apos;s</AccordionTrigger>
-                            <AccordionContent>
-                              <ul>
-                                {menCategories.map(
-                                  (component: {
-                                    title: string;
-                                    path: string | undefined;
-                                    description: string | null | undefined;
-                                  }) => {
-                                    if (component.title === 'All') return;
-                                    return (
-                                      <Link
-                                        key={component.title}
-                                        title={component.title}
-                                        href={component.path || '/'}
-                                        className="group w-full "
-                                      >
-                                        <li className=" rounded-md p-1 group-hover:border-2 group-hover:border-solid group-hover:border-orange-300 group-hover:text-orange-300">
-                                          {component.title}
-                                        </li>
-                                      </Link>
-                                    );
-                                  }
-                                )}
-                              </ul>
-                            </AccordionContent>
-                          </AccordionItem>
-                          <AccordionItem value="item-5" className="group py-4">
-                            <Link
-                              href={'/search/new-arrivals'}
-                              className="group-hover:text-orange-300"
-                            >
-                              New Arrivals
-                            </Link>
-                          </AccordionItem>
-                        </Accordion>
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
+                  <ScrollArea className="h-[70svh]">
+                    <Accordion type="multiple">
+                      <AccordionItem value="item-1">
+                        <AccordionTrigger>Our Products</AccordionTrigger>
+                        <AccordionContent>
+                          <Accordion type="multiple" className="w-full">
+                            <AccordionItem value="item-1">
+                              <AccordionTrigger>Gold</AccordionTrigger>
+                              <AccordionContent>
+                                <ul>
+                                  {goldCategories.map(
+                                    (component: {
+                                      title: string;
+                                      path: string | undefined;
+                                      description: string | null | undefined;
+                                    }) => {
+                                      if (component.title === 'All') return;
+                                      return (
+                                        <Link
+                                          key={component.title}
+                                          title={component.title}
+                                          href={component.path || '/'}
+                                          className="group w-full "
+                                        >
+                                          <li className=" rounded-md p-1 group-hover:border-2 group-hover:border-solid group-hover:border-orange-300 group-hover:text-orange-300">
+                                            {component.title}
+                                          </li>
+                                        </Link>
+                                      );
+                                    }
+                                  )}
+                                </ul>
+                              </AccordionContent>
+                            </AccordionItem>
+                            <AccordionItem value="item-2">
+                              <AccordionTrigger>Diamond</AccordionTrigger>
+                              <AccordionContent>
+                                <ul>
+                                  {diamondCategories.map(
+                                    (component: {
+                                      title: string;
+                                      path: string | undefined;
+                                      description: string | null | undefined;
+                                    }) => {
+                                      if (component.title === 'All') return;
+                                      return (
+                                        <Link
+                                          key={component.title}
+                                          title={component.title}
+                                          href={component.path || '/'}
+                                          className="group w-full "
+                                        >
+                                          <li className=" rounded-md p-1 group-hover:border-2 group-hover:border-solid group-hover:border-orange-300 group-hover:text-orange-300">
+                                            {component.title}
+                                          </li>
+                                        </Link>
+                                      );
+                                    }
+                                  )}
+                                </ul>
+                              </AccordionContent>
+                            </AccordionItem>
+                            <AccordionItem value="item-3">
+                              <AccordionTrigger>Silver</AccordionTrigger>
+                              <AccordionContent>
+                                <ul>
+                                  {silverCategories.map(
+                                    (component: {
+                                      title: string;
+                                      path: string | undefined;
+                                      description: string | null | undefined;
+                                    }) => {
+                                      if (component.title === 'All') return;
+                                      return (
+                                        <Link
+                                          key={component.title}
+                                          title={component.title}
+                                          href={component.path || '/'}
+                                          className="group w-full "
+                                        >
+                                          <li className=" rounded-md p-1 group-hover:border-2 group-hover:border-solid group-hover:border-orange-300 group-hover:text-orange-300">
+                                            {component.title}
+                                          </li>
+                                        </Link>
+                                      );
+                                    }
+                                  )}
+                                </ul>
+                              </AccordionContent>
+                            </AccordionItem>
+                            <AccordionItem value="item-4">
+                              <AccordionTrigger>Men&apos;s</AccordionTrigger>
+                              <AccordionContent>
+                                <ul>
+                                  {menCategories.map(
+                                    (component: {
+                                      title: string;
+                                      path: string | undefined;
+                                      description: string | null | undefined;
+                                    }) => {
+                                      if (component.title === 'All') return;
+                                      return (
+                                        <Link
+                                          key={component.title}
+                                          title={component.title}
+                                          href={component.path || '/'}
+                                          className="group w-full "
+                                        >
+                                          <li className=" rounded-md p-1 group-hover:border-2 group-hover:border-solid group-hover:border-orange-300 group-hover:text-orange-300">
+                                            {component.title}
+                                          </li>
+                                        </Link>
+                                      );
+                                    }
+                                  )}
+                                </ul>
+                              </AccordionContent>
+                            </AccordionItem>
+                            <AccordionItem value="item-5" className="group py-4">
+                              <Link
+                                href={'/search/new-arrivals'}
+                                className="group-hover:text-orange-300"
+                              >
+                                New Arrivals
+                              </Link>
+                            </AccordionItem>
+                          </Accordion>
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+                  </ScrollArea>
                   {/* {showProducts ? (
 
                   ) : null} */}
