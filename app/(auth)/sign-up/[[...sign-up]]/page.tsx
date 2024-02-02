@@ -92,10 +92,12 @@ export default function Page() {
       // This can return an array of errors.
       // See https://clerk.com/docs/custom-flows/error-handling to learn about error handling
       console.error('Error:', JSON.stringify(err, null, 2));
-      toast({
-        title: `${err.status} | ${JSON.stringify(err?.errors[0].meta)} ${err?.errors[0].message}`,
-        description: err?.errors[0].longMessage,
-        variant: 'destructive'
+      err.errors.map((error: any) => {
+        toast({
+          title: `${err.status} | ${JSON.stringify(error.meta)} ${error.message}`,
+          description: error.longMessage,
+          variant: 'destructive'
+        });
       });
     }
   };

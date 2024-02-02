@@ -2,7 +2,7 @@ import { ClerkProvider } from '@clerk/nextjs';
 import Navbar from 'components/layout/navbar';
 import LoadingDots from 'components/loading-dots';
 import { ThemeProvider } from 'components/theme-provider';
-import { Toaster } from 'components/ui/sonner';
+import { Toaster } from 'components/ui/toaster';
 import { GeistSans } from 'geist/font';
 import { ensureStartsWith } from 'lib/utils';
 import NextTopLoader from 'nextjs-toploader';

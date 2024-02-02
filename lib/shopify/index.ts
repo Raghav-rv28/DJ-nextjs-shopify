@@ -9,8 +9,8 @@ import { headers } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import {
   addToCartMutation,
-  createCartMutationOne,
-  createCartMutationTwo,
+  createCartMutationWOUser,
+  createCartMutationWUser,
   editCartItemsMutation,
   removeFromCartMutation,
   updateCartBuyerIdentity
@@ -46,8 +46,8 @@ import {
   ShopifyCollectionOperation,
   ShopifyCollectionProductsOperation,
   ShopifyCollectionsOperation,
-  ShopifyCreateCartOperationOne,
-  ShopifyCreateCartOperationTwo,
+  ShopifyCreateCartOperationOne as ShopifyCreateCartOperationWOUser,
+  ShopifyCreateCartOperationTwo as ShopifyCreateCartOperationWUser,
   ShopifyMenuOperation,
   ShopifyPageOperation,
   ShopifyPagesOperation,
@@ -228,20 +228,20 @@ export async function createCart(): Promise<Cart | undefined> {
   console.log(`IN CART: ${userDetails?.accessToken}`);
   let res;
   if (userDetails?.accessToken !== undefined && user !== null) {
-    res = await shopifyFetch<ShopifyCreateCartOperationTwo>({
-      query: createCartMutationOne,
+    res = await shopifyFetch<ShopifyCreateCartOperationWUser>({
+      query: createCartMutationWUser,
       variables: {
         buyerIdentity: {
           email: user.emailAddresses[0]?.emailAddress || '',
           customerAccessToken: userDetails?.accessToken || '',
-          phone: '+18036165148'
+          phone: user.phoneNumbers[0]?.phoneNumber || ''
         }
       },
       cache: 'no-store'
     });
   } else {
-    res = await shopifyFetch<ShopifyCreateCartOperationOne>({
-      query: createCartMutationTwo,
+    res = await shopifyFetch<ShopifyCreateCartOperationWOUser>({
+      query: createCartMutationWOUser,
       cache: 'no-store'
     });
   }

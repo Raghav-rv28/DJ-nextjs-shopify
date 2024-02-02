@@ -8,6 +8,7 @@ import Incentives from 'components/Home/incentives';
 import Reviews from 'components/Home/reviews';
 import { ThreeItemGrid } from 'components/grid/three-items';
 import Footer from 'components/layout/footer';
+import { Skeleton } from 'components/ui/skeleton';
 import { Suspense } from 'react';
 
 export const metadata = {
@@ -21,7 +22,9 @@ export default async function HomePage() {
   return (
     <>
       {/* Intro Section */}
-      <HeroSection />
+      <Suspense fallback={<Skeleton className="h-[75svh] w-[75svw]" />}>
+        <HeroSection />
+      </Suspense>
       <Divider />
       {/* Collections */}
       <Collections />
