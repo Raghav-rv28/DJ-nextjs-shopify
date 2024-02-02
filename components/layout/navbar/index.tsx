@@ -2,7 +2,7 @@ import Cart from 'components/cart';
 import OpenCart from 'components/cart/open-cart';
 import ThemeSwitcher from 'components/layout/navbar/theme-switcher';
 import { Separator } from 'components/ui/separator';
-import { getCollections, getMenu } from 'lib/shopify';
+import { getCollections } from 'lib/shopify';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Suspense } from 'react';
@@ -12,7 +12,6 @@ import MobileMenu from './mobile-menu';
 import Search from './search';
 
 export default async function Navbar() {
-  const collections = await getMenu('collections-menu');
   const goldCollections = await getCollections('title:Gold');
   const menCollections = await getCollections('title:Men');
   const silverCollections = await getCollections('title:silver');
@@ -21,7 +20,12 @@ export default async function Navbar() {
     <nav className="sticky top-0 z-[60] flex flex-col items-center justify-between bg-inherit p-4 lg:justify-between lg:px-6">
       <div className="my-3 flex w-full items-center">
         <div className="block flex-none lg:hidden">
-          <MobileMenu menu={collections} />
+          <MobileMenu
+            goldCategories={goldCollections}
+            menCategories={menCollections}
+            silverCategories={silverCollections}
+            diamondCategories={diamondCollections}
+          />
         </div>
         <div className="flex w-full lg:w-1/3">
           <Link
