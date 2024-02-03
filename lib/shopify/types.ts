@@ -360,3 +360,11 @@ export type createCustomerOperation = {
 };
 
 export type buyerIdentityInput = {};
+
+export type ShopifySearchOperation = {
+  data: any;
+  variables: {
+    query?: string;
+    first: number;
+  };
+};
