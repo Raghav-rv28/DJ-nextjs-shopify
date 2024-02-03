@@ -9,7 +9,7 @@ export default function Gender() {
         <h2 className="text-center text-3xl font-extrabold text-black dark:text-white sm:text-4xl">
           Shop By Gender
         </h2>
-        <p className="mt-2 text-center text-sm text-gray-300">
+        <p className="mt-2 text-center text-sm text-black dark:text-white lg:text-base">
           First-class jewelry for first-class Men, Women & Children.
         </p>
         <div className="mt-8 flex items-center justify-center">

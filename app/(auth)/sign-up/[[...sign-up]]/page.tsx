@@ -251,7 +251,7 @@ export default function Page() {
               <FormItem>
                 <FormLabel>Phone No.</FormLabel>
                 <FormControl>
-                  <Input type="text" placeholder="+1" inputMode="numeric" {...field} />
+                  <Input type="text" defaultValue={'+1'} inputMode="numeric" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
