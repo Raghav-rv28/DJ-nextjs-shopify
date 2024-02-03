@@ -58,7 +58,7 @@ export default function Categories() {
               className="group relative flex items-center justify-center pl-2 sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
             >
               <Link href="/">
-                <div className="absolute inset-x-0 bottom-10 z-50 flex items-end justify-center text-3xl font-semibold text-orange-300 opacity-0 duration-300 group-hover:opacity-100">
+                <div className="absolute inset-x-0 bottom-40 z-50 flex items-end justify-center text-3xl font-semibold text-orange-300 opacity-0 duration-300 group-hover:opacity-100">
                   {category.title}
                 </div>
                 <Image

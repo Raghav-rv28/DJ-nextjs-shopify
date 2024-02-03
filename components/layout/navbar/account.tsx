@@ -25,7 +25,7 @@ export default async function Account() {
         <div className="m-1 mt-0 flex justify-end md:hidden">
           <ThemeSwitcher />
         </div>
-        <DropdownMenuSeparator />
+        <DropdownMenuSeparator className="flex md:hidden" />
         {/* NAVIGATION */}
         <SignedIn>
           <DropdownMenuLabel>{`${user?.firstName} ${user?.lastName}`}</DropdownMenuLabel>

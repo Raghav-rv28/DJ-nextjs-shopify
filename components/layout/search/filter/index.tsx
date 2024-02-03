@@ -1,3 +1,4 @@
+import { ScrollArea } from 'components/ui/scroll-area';
 import { SortFilterItem } from 'lib/constants';
 import FilterItemDropdown from './dropdown';
 import { FilterItem } from './item';
@@ -17,20 +18,18 @@ function FilterItemList({ list }: { list: ListItem[] }) {
 
 export default function FilterList({ list, title }: { list: ListItem[]; title?: string }) {
   return (
-    <>
-      <nav>
-        {title ? (
-          <h3 className="hidden text-xs text-neutral-500 dark:text-neutral-400 md:block">
-            {title}
-          </h3>
-        ) : null}
-        <ul className="hidden md:block">
+    <nav className="w-full">
+      {title ? (
+        <h3 className="hidden text-xs text-neutral-500 dark:text-neutral-400 md:block">{title}</h3>
+      ) : null}
+      <ul className="hidden md:block">
+        <ScrollArea className="h-[350px] w-[300px] p-2">
           <FilterItemList list={list} />
-        </ul>
-        <ul className="md:hidden">
-          <FilterItemDropdown list={list} />
-        </ul>
-      </nav>
-    </>
+        </ScrollArea>
+      </ul>
+      <ul className="md:hidden">
+        <FilterItemDropdown list={list} />
+      </ul>
+    </nav>
   );
 }

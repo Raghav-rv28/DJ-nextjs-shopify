@@ -52,7 +52,7 @@ export default async function ProductPage({ params }: { params: { handle: string
 
   if (!product) return notFound();
 
-  console.log(product.priceRange);
+  console.log(product.metafields);
   const productJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Product',
