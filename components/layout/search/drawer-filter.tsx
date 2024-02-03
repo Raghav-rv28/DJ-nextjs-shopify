@@ -5,25 +5,41 @@ import {
   AccordionItem,
   AccordionTrigger
 } from 'components/ui/accordion';
+import { Button } from 'components/ui/button';
 import { Checkbox } from 'components/ui/checkbox';
 import {
   Drawer,
   DrawerClose,
   DrawerContent,
+  DrawerFooter,
   DrawerHeader,
   DrawerTrigger
 } from 'components/ui/drawer';
+import { Input } from 'components/ui/input';
 import { SlidersHorizontal, X } from 'lucide-react';
-import React from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import React, { useCallback } from 'react';
 
 export default function DrawerFilter() {
   const [jewelleryTypes, setJewelleryTypes] = React.useState(['Gold']);
-
+  const [priceRange, setPriceRange] = React.useState({ min: 0.0, max: 1e7 });
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const mutateJewelleryTypeFilter = (val: string | boolean, type: string) => {
     if (!jewelleryTypes.includes(type) && !!val) setJewelleryTypes((prev) => prev.concat([type]));
     if (jewelleryTypes.includes(type) && !!!val)
       setJewelleryTypes((prev) => prev.filter((jType) => jType !== type));
   };
+
+  const onSubmit = useCallback(() => {
+    let url = `${pathname}?`;
+    searchParams.forEach((val, key) => {
+      url = url.concat(`${key}=${val}&`);
+    });
+    url = url.concat(`min=${priceRange.min}&max=${priceRange.max}`);
+    router.push(url);
+  }, [pathname, priceRange, router, searchParams]);
 
   return (
     <div>
@@ -92,8 +108,34 @@ export default function DrawerFilter() {
                   </div>
                 </AccordionContent>
               </AccordionItem>
+              <AccordionItem value="item-2">
+                <AccordionTrigger>Price Range</AccordionTrigger>
+                <AccordionContent className="flex flex-row items-center justify-between p-1">
+                  <Input
+                    className="mx-1"
+                    type="number"
+                    inputMode="numeric"
+                    onChange={(e) =>
+                      setPriceRange((prev) => ({ ...prev, min: Number(e.target.value) }))
+                    }
+                    defaultValue={priceRange.min}
+                  />
+                  <Input
+                    className="mx-1"
+                    type="number"
+                    inputMode="numeric"
+                    onChange={(e) =>
+                      setPriceRange((prev) => ({ ...prev, max: Number(e.target.value) }))
+                    }
+                    defaultValue={priceRange.max}
+                  />
+                </AccordionContent>
+              </AccordionItem>
             </Accordion>
           </div>
+          <DrawerFooter>
+            <Button onClick={onSubmit}>Submit</Button>
+          </DrawerFooter>
         </DrawerContent>
       </Drawer>
     </div>

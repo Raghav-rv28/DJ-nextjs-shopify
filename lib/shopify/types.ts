@@ -366,5 +366,6 @@ export type ShopifySearchOperation = {
   variables: {
     query?: string;
     first: number;
+    productFilters?: any;
   };
 };

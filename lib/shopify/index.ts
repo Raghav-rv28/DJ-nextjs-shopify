@@ -555,16 +555,19 @@ export async function createCustomerFunction(props: createCustomerInput) {
 
 export async function getSearchResults({
   query,
-  first = 50
+  first = 50,
+  productFilters = [{ available: true }, { price: { max: 1100.0, min: 500.0 } }]
 }: {
   query?: string;
   first?: number;
+  productFilters?: any;
 }): Promise<Product[]> {
   const res = await shopifyFetch<ShopifySearchOperation>({
     query: getSearchResultsQuery,
     variables: {
       query,
-      first
+      first,
+      productFilters
     }
   });
   return reshapeProducts(removeEdgesAndNodes(res.body.data.search));
