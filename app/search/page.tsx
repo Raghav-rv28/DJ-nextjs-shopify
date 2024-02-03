@@ -17,17 +17,16 @@ export default async function SearchPage({
   const { sort, q: searchValue, min, max } = searchParams as { [key: string]: any };
   const { sortKey, reverse } = sorting.find((item) => item.slug === sort) || defaultSort;
   let products;
+  const productFilters = [];
 
   if (min || max) {
-    products = await getSearchResults({
-      query: searchValue,
-      productFilters: [{ price: { max: parseFloat(max), min: parseFloat(min) } }]
-    });
-  } else {
-    products = await getSearchResults({
-      query: searchValue
-    });
+    productFilters.push({ price: { max: parseFloat(max), min: parseFloat(min) } });
   }
+
+  products = await getSearchResults({
+    query: searchValue,
+    productFilters
+  });
   if (products.length === 0) {
     products = await getProducts({ sortKey, reverse, query: searchValue });
   }

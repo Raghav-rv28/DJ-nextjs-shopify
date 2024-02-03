@@ -129,7 +129,7 @@ export async function shopifyFetch<T>({
 }
 
 const removeEdgesAndNodes = (array: Connection<any>) => {
-  return array.edges.map((edge) => edge?.node);
+  return (array?.edges ?? []).map((edge) => edge?.node);
 };
 
 const reshapeCart = (cart: ShopifyCart): Cart => {
@@ -186,12 +186,11 @@ const reshapeImages = (images: Connection<Image>, productTitle: string) => {
 };
 
 const reshapeProduct = (product: ShopifyProduct, filterHiddenProducts: boolean = true) => {
-  if (!product || (filterHiddenProducts && product.tags.includes(HIDDEN_PRODUCT_TAG))) {
+  if (!product || (filterHiddenProducts && product.tags?.includes(HIDDEN_PRODUCT_TAG))) {
     return undefined;
   }
 
   const { images, variants, ...rest } = product;
-
   return {
     ...rest,
     images: reshapeImages(images, product.title),
@@ -549,14 +548,13 @@ export async function createCustomerFunction(props: createCustomerInput) {
     query: createCustomer,
     variables: { input: props }
   });
-  console.log(JSON.stringify(req.body.data));
   return req.body.data;
 }
 
 export async function getSearchResults({
   query,
   first = 50,
-  productFilters = [{ available: true }, { price: { max: 1100.0, min: 500.0 } }]
+  productFilters = []
 }: {
   query?: string;
   first?: number;

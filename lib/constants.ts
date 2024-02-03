@@ -20,31 +20,6 @@ export const sorting: SortFilterItem[] = [
   { title: 'Price: High to low', slug: 'price-desc', sortKey: 'PRICE', reverse: true }
 ];
 
-export const MetaFieldFiltering = [
-  { title: 'Price', type: Number, min: 1, max: 1e8 },
-  {
-    title: 'Metal Type',
-    type: 'Radio',
-    values: ['Gold', 'Diamond', 'Silver']
-  },
-  {
-    title: 'Gold Purity',
-    type: 'Radio',
-    values: ['10k', '14k', '21k', '22k']
-  },
-  {
-    title: 'Ring Size',
-    type: Number,
-    min: 1,
-    max: 1e4
-  },
-  {
-    title: 'Metal Color',
-    type: 'Radio',
-    values: ['yellow gold', 'rose gold', 'white gold']
-  }
-];
-
 export const TAGS = {
   collections: 'collections',
   products: 'products',

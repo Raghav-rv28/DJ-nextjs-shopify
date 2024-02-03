@@ -134,7 +134,9 @@ export default function DrawerFilter() {
             </Accordion>
           </div>
           <DrawerFooter>
-            <Button onClick={onSubmit}>Submit</Button>
+            <DrawerClose>
+              <Button onClick={onSubmit}>Submit</Button>
+            </DrawerClose>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
