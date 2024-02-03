@@ -17,7 +17,7 @@ export default async function SearchPage({
   const { sortKey, reverse } = sorting.find((item) => item.slug === sort) || defaultSort;
 
   const products = await getProducts({ sortKey, reverse, query: searchValue });
-  console.log(getSearchResults({ query: searchValue }));
+  const productsSearchQuery = await getSearchResults({ query: searchValue });
   const resultsText = products.length > 1 ? 'results' : 'result';
   return (
     <>
@@ -29,7 +29,12 @@ export default async function SearchPage({
           <span className="font-bold">&quot;{searchValue}&quot;</span>
         </p>
       ) : null}
-      {products.length > 0 ? (
+      {productsSearchQuery.length > 0 ? (
+        <Grid className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          <ProductGridItems products={productsSearchQuery} />
+        </Grid>
+      ) : null}
+      {productsSearchQuery.length === 0 && products.length > 0 ? (
         <Grid className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           <ProductGridItems products={products} />
         </Grid>

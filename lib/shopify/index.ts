@@ -497,7 +497,6 @@ export async function getProducts({
       sortKey
     }
   });
-
   return reshapeProducts(removeEdgesAndNodes(res.body.data.products));
 }
 
@@ -568,7 +567,6 @@ export async function getSearchResults({
       first
     }
   });
-  console.log(res.body.data);
   return reshapeProducts(removeEdgesAndNodes(res.body.data.search));
 }
 
