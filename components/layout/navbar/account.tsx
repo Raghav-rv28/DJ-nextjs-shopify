@@ -10,6 +10,7 @@ import {
 } from 'components/ui/dropdown-menu';
 import Link from 'next/link';
 import SignOutButton from './sign-out';
+import ThemeSwitcher from './theme-switcher';
 export default async function Account() {
   const user = await currentUser();
   return (
@@ -21,6 +22,10 @@ export default async function Account() {
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="z-[70] w-56">
+        <div className="m-1 mt-0 flex justify-end md:hidden">
+          <ThemeSwitcher />
+        </div>
+        <DropdownMenuSeparator />
         {/* NAVIGATION */}
         <SignedIn>
           <DropdownMenuLabel>{`${user?.firstName} ${user?.lastName}`}</DropdownMenuLabel>
