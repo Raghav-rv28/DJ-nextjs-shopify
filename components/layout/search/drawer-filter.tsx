@@ -18,6 +18,7 @@ import { Input } from 'components/ui/input';
 import { Label } from 'components/ui/label';
 import { RadioGroup, RadioGroupItem } from 'components/ui/radio-group';
 import { ScrollArea } from 'components/ui/scroll-area';
+import { createUrl } from 'lib/utils';
 import { SlidersHorizontal, X } from 'lucide-react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useCallback } from 'react';
@@ -36,21 +37,19 @@ export default function DrawerFilter({ productTags }: { productTags: string[] })
   // };
 
   const onSubmit = useCallback(() => {
-    let url = `${pathname}?`;
-
-    searchParams.forEach((val, key) => {
-      if (key === 'q' || key === 'sort') url = url.concat(`${key}=${val}&`);
-    });
-
-    if (
-      !url.includes('min') &&
-      !url.includes('max') &&
-      (priceRange.min !== 0 || priceRange.max !== 1e7)
-    )
-      url = url.concat(`min=${priceRange.min}&max=${priceRange.max}&`);
-
-    if (!url.includes('tag') && productTag !== 'none') url = url.concat(`tag=${productTag}&`);
-    router.push(url);
+    const params = new URLSearchParams(searchParams);
+    const href = createUrl(pathname, searchParams);
+    if (!params.has('min') || !params.has('max')) {
+      params.delete('min');
+      params.delete('max');
+      params.append('min', String(priceRange.min));
+      params.append('max', String(priceRange.max));
+    }
+    if (!params.has('tag')) {
+      params.delete('tag');
+      params.append('tag', productTag);
+    }
+    router.push(href);
   }, [pathname, priceRange.max, priceRange.min, productTag, router, searchParams]);
 
   const changeTag = useCallback((value: string) => {
@@ -64,7 +63,7 @@ export default function DrawerFilter({ productTags }: { productTags: string[] })
           Filter
           <SlidersHorizontal className="ml-2 h-4 w-4 " />
         </DrawerTrigger>
-        <DrawerContent className="z-[70] flex h-full w-full flex-col bg-white pb-6 dark:bg-black md:max-w-[40vw]">
+        <DrawerContent className="z-[70] ml-2 flex h-full max-w-[95svw] flex-col bg-white pb-6 dark:bg-black md:max-w-[40vw]">
           <DrawerHeader className="flex flex-row items-center justify-between bg-orange-300 py-3 dark:bg-slate-800">
             Filters
             <DrawerClose>

@@ -24,7 +24,7 @@ export default async function Collections() {
           .filter((val) => val.image)
           .map((val) => (
             <Link key={val.handle} href={`${val.path}`}>
-              <Card className="group max-w-[svw] rounded-lg transition duration-1000">
+              <Card className="group max-w-[svw] rounded-lg transition duration-100 hover:border-2 hover:border-orange-300">
                 <CardTitle className="my-4">{val.title}</CardTitle>
                 <CardContent>
                   <Image

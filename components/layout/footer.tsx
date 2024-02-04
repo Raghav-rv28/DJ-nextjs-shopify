@@ -32,7 +32,7 @@ export default async function Footer() {
               <p className="mb-2 text-xl font-semibold uppercase text-gray-600">Follow Us</p>
               <div className="flex space-x-2">
                 <Link href={'https://www.facebook.com/jewellersdubai'} target="_blank">
-                  <FacebookIcon className="h-6 w-6 text-blue-600" />
+                  <FacebookIcon className="h-6 w-6 text-orange-300" />
                 </Link>
                 <Link href={'https://www.instagram.com/dubai.jewellers/'} target="_blank">
                   <InstagramIcon className="h-6 w-6 text-pink-500" />

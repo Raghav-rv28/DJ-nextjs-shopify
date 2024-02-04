@@ -55,7 +55,7 @@ export default function Categories() {
           {categories.map((category) => (
             <CarouselItem
               key={category.url}
-              className="group relative flex items-center justify-center pl-2 sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
+              className="group relative flex items-center justify-center pl-2  sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
             >
               <Link href="/">
                 <div className="absolute inset-x-0 bottom-40 z-50 flex items-end justify-center text-3xl font-semibold text-orange-300 opacity-0 duration-300 group-hover:opacity-100">
@@ -63,7 +63,7 @@ export default function Categories() {
                 </div>
                 <Image
                   src={category.url}
-                  className="overflow-hidden group-hover:scale-105 group-hover:blur-sm"
+                  className="overflow-hidden rounded-lg group-hover:scale-105 group-hover:border-2 group-hover:border-orange-300"
                   width={450}
                   height={900}
                   alt={`Banner image for category ${category.title}`}
