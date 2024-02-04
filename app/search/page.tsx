@@ -30,7 +30,9 @@ export default async function SearchPage({
 
   const products = await getSearchResults({
     query: searchValue,
-    productFilters
+    reverse,
+    productFilters,
+    sortKey
   });
   // if (products.length === 0) {
   //   products = await getProducts({ sortKey, reverse, query: searchValue });

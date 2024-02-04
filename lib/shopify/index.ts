@@ -555,11 +555,15 @@ export async function createCustomerFunction(props: createCustomerInput) {
 
 export async function getSearchResults({
   query,
+  reverse,
   first = 50,
+  sortKey,
   productFilters = []
 }: {
   query?: string;
+  sortKey: string;
   first?: number;
+  reverse: boolean;
   productFilters?: any;
 }): Promise<Product[]> {
   const res = await shopifyFetch<ShopifySearchOperation>({
@@ -567,6 +571,8 @@ export async function getSearchResults({
     variables: {
       query,
       first,
+      reverse,
+      sortKey,
       productFilters
     }
   });
