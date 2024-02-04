@@ -10,7 +10,6 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
-  DrawerFooter,
   DrawerHeader,
   DrawerTrigger
 } from 'components/ui/drawer';
@@ -179,11 +178,11 @@ export default function DrawerFilter({ productTags }: { productTags: string[] })
               </AccordionItem> */}
             </Accordion>
           </div>
-          <DrawerFooter>
-            <DrawerClose>
-              <Button onClick={onSubmit}>Submit</Button>
-            </DrawerClose>
-          </DrawerFooter>
+          <DrawerClose>
+            <Button className="my-3" onClick={onSubmit}>
+              Submit
+            </Button>
+          </DrawerClose>
         </DrawerContent>
       </Drawer>
     </div>
