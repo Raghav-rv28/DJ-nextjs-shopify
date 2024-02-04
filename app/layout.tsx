@@ -5,6 +5,7 @@ import { ThemeProvider } from 'components/theme-provider';
 import { Toaster } from 'components/ui/toaster';
 import { GeistSans } from 'geist/font';
 import { ensureStartsWith } from 'lib/utils';
+import { Metadata } from 'next';
 import NextTopLoader from 'nextjs-toploader';
 import { ReactNode, Suspense } from 'react';
 import './globals.css';
@@ -14,7 +15,7 @@ const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
   : 'http://localhost:3000';
 const twitterCreator = TWITTER_CREATOR ? ensureStartsWith(TWITTER_CREATOR, '@') : undefined;
 const twitterSite = TWITTER_SITE ? ensureStartsWith(TWITTER_SITE, 'https://') : undefined;
-export const metadata = {
+export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
     default: SITE_NAME!,
