@@ -16,9 +16,9 @@ export default async function Collections() {
   return (
     <div className="my-8 flex w-full flex-col items-center justify-center text-center">
       <h2 className="my-3 text-5xl text-orange-300">Shop By Collections</h2>
-      <h4 className="mb-5 text-2xl">
+      <h3 className="mb-5 text-2xl">
         Browse through your favorite categories. We&apos;ve got them all!
-      </h4>
+      </h3>
       <div className="mx-10 hidden flex-row flex-wrap items-center justify-center gap-5 md:flex">
         {collections
           .filter((val) => val.image)
