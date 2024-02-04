@@ -1,16 +1,10 @@
+import Image from 'next/image';
 import Link from 'next/link';
-
 export default function About() {
   return (
     <div className="flex w-full">
-      <div
-        className="flex justify-center text-black dark:text-white md:hidden"
-        style={{
-          backgroundImage:
-            "url('https://cdn.shopify.com/s/files/1/0736/0882/3069/files/banner.jpg?v=1684516416')"
-        }}
-      >
-        <div className="mx-auto max-w-7xl rounded-xl px-4 py-12 opacity-95 sm:px-6 lg:px-8">
+      <div className="flex flex-col justify-center text-black dark:text-white md:hidden">
+        <div className="mx-auto max-w-7xl rounded-xl px-4 py-12 opacity-95 sm:px-6 md:w-1/2 lg:px-8">
           <div className="mt-12 text-center">
             <h1 className="text-5xl font-bold leading-tight">
               We built our business on great customer service
@@ -34,6 +28,14 @@ export default function About() {
               Read More →
             </Link>
           </div>
+        </div>
+        <div className="flex w-full items-center justify-center bg-cover bg-center md:hidden">
+          <Image
+            src={"https://cdn.shopify.com/s/files/1/0736/0882/3069/files/banner.jpg?v=1684516416')"}
+            alt={'banner'}
+            width={1500}
+            height={1000}
+          />
         </div>
       </div>
       <div className="hidden w-full flex-col justify-center p-5 text-black dark:text-white md:flex md:w-1/2 md:p-20">
@@ -61,13 +63,14 @@ export default function About() {
           </Link>
         </div>
       </div>
-      <div
-        className="hidden w-1/2 bg-cover bg-center md:flex"
-        style={{
-          backgroundImage:
-            "url('https://cdn.shopify.com/s/files/1/0736/0882/3069/files/banner.jpg?v=1684516416')"
-        }}
-      />
+      <div className="hidden w-1/2 bg-cover bg-center md:flex">
+        <Image
+          src={"https://cdn.shopify.com/s/files/1/0736/0882/3069/files/banner.jpg?v=1684516416')"}
+          alt={'banner'}
+          width={1500}
+          height={1000}
+        />
+      </div>
     </div>
   );
 }
