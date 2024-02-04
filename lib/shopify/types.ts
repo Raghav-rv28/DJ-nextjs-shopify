@@ -369,3 +369,12 @@ export type ShopifySearchOperation = {
     productFilters?: any;
   };
 };
+
+export type ShopifyProductTagsRetrieveOperation = {
+  data: {
+    productTags: { edges: { node: string; cursor: string }[] };
+  };
+  variables: {
+    first: number;
+  };
+};

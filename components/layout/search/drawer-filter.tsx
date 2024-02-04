@@ -6,7 +6,6 @@ import {
   AccordionTrigger
 } from 'components/ui/accordion';
 import { Button } from 'components/ui/button';
-import { Checkbox } from 'components/ui/checkbox';
 import {
   Drawer,
   DrawerClose,
@@ -16,30 +15,47 @@ import {
   DrawerTrigger
 } from 'components/ui/drawer';
 import { Input } from 'components/ui/input';
+import { Label } from 'components/ui/label';
+import { RadioGroup, RadioGroupItem } from 'components/ui/radio-group';
+import { ScrollArea } from 'components/ui/scroll-area';
 import { SlidersHorizontal, X } from 'lucide-react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useCallback } from 'react';
 
-export default function DrawerFilter() {
-  const [jewelleryTypes, setJewelleryTypes] = React.useState(['Gold']);
+export default function DrawerFilter({ productTags }: { productTags: string[] }) {
+  // const [jewelleryTypes, setJewelleryTypes] = React.useState(['Gold']);
+  const [productTag, setProductTag] = React.useState('none');
   const [priceRange, setPriceRange] = React.useState({ min: 0.0, max: 1e7 });
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
-  const mutateJewelleryTypeFilter = (val: string | boolean, type: string) => {
-    if (!jewelleryTypes.includes(type) && !!val) setJewelleryTypes((prev) => prev.concat([type]));
-    if (jewelleryTypes.includes(type) && !!!val)
-      setJewelleryTypes((prev) => prev.filter((jType) => jType !== type));
-  };
+  // const mutateJewelleryTypeFilter = (val: string | boolean, type: string) => {
+  //   if (!jewelleryTypes.includes(type) && !!val) setJewelleryTypes((prev) => prev.concat([type]));
+  //   if (jewelleryTypes.includes(type) && !!!val)
+  //     setJewelleryTypes((prev) => prev.filter((jType) => jType !== type));
+  // };
 
   const onSubmit = useCallback(() => {
     let url = `${pathname}?`;
+
     searchParams.forEach((val, key) => {
-      url = url.concat(`${key}=${val}&`);
+      if (key === 'q') url = url.concat(`${key}=${val}&`);
     });
-    url = url.concat(`min=${priceRange.min}&max=${priceRange.max}`);
+
+    if (
+      !url.includes('min') &&
+      !url.includes('max') &&
+      (priceRange.min !== 0 || priceRange.max !== 1e7)
+    )
+      url = url.concat(`min=${priceRange.min}&max=${priceRange.max}&`);
+
+    if (!url.includes('tag') && productTag !== 'none') url = url.concat(`tag=${productTag}&`);
     router.push(url);
-  }, [pathname, priceRange, router, searchParams]);
+  }, [pathname, priceRange.max, priceRange.min, productTag, router, searchParams]);
+
+  const changeTag = useCallback((value: string) => {
+    setProductTag(value);
+  }, []);
 
   return (
     <div>
@@ -58,9 +74,63 @@ export default function DrawerFilter() {
           <div className="m-[5px] flex w-[98%]">
             <Accordion type="multiple" className="w-full">
               <AccordionItem value="item-1">
-                <AccordionTrigger>Jewellery Type</AccordionTrigger>
+                <AccordionTrigger>Product Tag</AccordionTrigger>
                 <AccordionContent>
-                  <div className="flex flex-col items-start space-x-2">
+                  <RadioGroup
+                    defaultValue={productTag}
+                    onValueChange={changeTag}
+                    className="w-full"
+                  >
+                    <ScrollArea className="max-h-[400px] w-full">
+                      <div className="flex flex-col items-start space-x-2">
+                        <div className="flex items-center p-1">
+                          <RadioGroupItem className="mx-1 ml-3" value="none" id="none" />
+                          <Label className="text-base" htmlFor="none">
+                            None
+                          </Label>
+                        </div>
+                        {productTags.map((tag) => {
+                          return (
+                            <div key={tag} className="flex items-center p-1">
+                              <RadioGroupItem className="mx-1" value={tag} id={tag} />
+                              <Label className="text-base" htmlFor={tag}>
+                                {tag}
+                              </Label>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </ScrollArea>
+                  </RadioGroup>
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-2">
+                <AccordionTrigger>Price Range</AccordionTrigger>
+                <AccordionContent className="flex flex-row items-center justify-between p-1">
+                  <Input
+                    className="mx-1"
+                    type="number"
+                    inputMode="numeric"
+                    onChange={(e) =>
+                      setPriceRange((prev) => ({ ...prev, min: Number(e.target.value) }))
+                    }
+                    defaultValue={priceRange.min}
+                  />
+                  <Input
+                    className="mx-1"
+                    type="number"
+                    inputMode="numeric"
+                    onChange={(e) =>
+                      setPriceRange((prev) => ({ ...prev, max: Number(e.target.value) }))
+                    }
+                    defaultValue={priceRange.max}
+                  />
+                </AccordionContent>
+              </AccordionItem>
+              {/* <AccordionItem value="item-3">
+                <AccordionTrigger>Jewellery Type</AccordionTrigger>
+                <AccordionContent className="flex flex-row items-center justify-between p-1">
+                <div className="flex flex-col items-start space-x-2">
                     <div className="flex flex-row items-center justify-center p-1">
                       <Checkbox
                         id="Gold"
@@ -107,30 +177,7 @@ export default function DrawerFilter() {
                     </div>
                   </div>
                 </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-2">
-                <AccordionTrigger>Price Range</AccordionTrigger>
-                <AccordionContent className="flex flex-row items-center justify-between p-1">
-                  <Input
-                    className="mx-1"
-                    type="number"
-                    inputMode="numeric"
-                    onChange={(e) =>
-                      setPriceRange((prev) => ({ ...prev, min: Number(e.target.value) }))
-                    }
-                    defaultValue={priceRange.min}
-                  />
-                  <Input
-                    className="mx-1"
-                    type="number"
-                    inputMode="numeric"
-                    onChange={(e) =>
-                      setPriceRange((prev) => ({ ...prev, max: Number(e.target.value) }))
-                    }
-                    defaultValue={priceRange.max}
-                  />
-                </AccordionContent>
-              </AccordionItem>
+              </AccordionItem> */}
             </Accordion>
           </div>
           <DrawerFooter>
