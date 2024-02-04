@@ -39,7 +39,7 @@ export default function DrawerFilter({ productTags }: { productTags: string[] })
     let url = `${pathname}?`;
 
     searchParams.forEach((val, key) => {
-      if (key === 'q') url = url.concat(`${key}=${val}&`);
+      if (key === 'q' || key === 'sort') url = url.concat(`${key}=${val}&`);
     });
 
     if (

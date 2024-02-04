@@ -1,7 +1,7 @@
 import Grid from 'components/grid';
 import ProductGridItems from 'components/layout/product-grid-items';
 import DrawerFilter from 'components/layout/search/drawer-filter';
-import { defaultSort, sorting } from 'lib/constants';
+import { defaultSort, sortingSearch } from 'lib/constants';
 import { getProductTags, getSearchResults } from 'lib/shopify';
 
 export const metadata = {
@@ -15,7 +15,7 @@ export default async function SearchPage({
   searchParams?: { [key: string]: string | string[] | undefined };
 }) {
   const { sort, q: searchValue, min, max, tag } = searchParams as { [key: string]: any };
-  const { sortKey, reverse } = sorting.find((item) => item.slug === sort) || defaultSort;
+  const { sortKey, reverse } = sortingSearch.find((item) => item.slug === sort) || defaultSort;
   // let products;
   const productFilters = [];
 

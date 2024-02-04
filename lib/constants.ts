@@ -12,6 +12,11 @@ export const defaultSort: SortFilterItem = {
   reverse: false
 };
 
+export const sortingSearch: SortFilterItem[] = [
+  defaultSort,
+  { title: 'Price: Low to high', slug: 'price-asc', sortKey: 'PRICE', reverse: false }, // asc
+  { title: 'Price: High to low', slug: 'price-desc', sortKey: 'PRICE', reverse: true }
+];
 export const sorting: SortFilterItem[] = [
   defaultSort,
   { title: 'Trending', slug: 'trending-desc', sortKey: 'BEST_SELLING', reverse: false }, // asc

@@ -566,6 +566,7 @@ export async function getSearchResults({
   reverse: boolean;
   productFilters?: any;
 }): Promise<Product[]> {
+  console.log(reverse, sortKey);
   const res = await shopifyFetch<ShopifySearchOperation>({
     query: getSearchResultsQuery,
     variables: {
