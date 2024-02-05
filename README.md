@@ -81,3 +81,5 @@ PRISMA & PLANETSCALE: https://planetscale.com/docs/prisma/prisma-quickstart
 
 update DB: npx prisma db push
 start studio: npx prisma studio
+
+analyze build bundle : npx cross-env ANALYZE=true pnpm build

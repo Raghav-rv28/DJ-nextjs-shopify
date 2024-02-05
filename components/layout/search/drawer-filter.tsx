@@ -37,7 +37,6 @@ export default function DrawerFilter({ productTags }: { productTags: string[] })
 
   const onSubmit = useCallback(() => {
     const params = new URLSearchParams(searchParams);
-    const href = createUrl(pathname, searchParams);
     if (!params.has('min') || !params.has('max')) {
       params.delete('min');
       params.delete('max');
@@ -48,6 +47,7 @@ export default function DrawerFilter({ productTags }: { productTags: string[] })
       params.delete('tag');
       params.append('tag', productTag);
     }
+    const href = createUrl(pathname, params);
     router.push(href);
   }, [pathname, priceRange.max, priceRange.min, productTag, router, searchParams]);
 
