@@ -36,11 +36,14 @@ export default function DrawerFilter({ productTags }: { productTags: string[] })
   // };
 
   useEffect(() => {
-    if (searchParams.has('min'))
+    if (searchParams.has('min') && searchParams.get('min') !== '0') {
       setPriceRange((prev) => ({ ...prev, min: Number(searchParams.get('min')) ?? 0 }));
-    if (searchParams.has('max'))
+    }
+    if (searchParams.has('max') && Number(searchParams.get('max')) !== 1e7)
       setPriceRange((prev) => ({ ...prev, max: Number(searchParams.get('max')) ?? 1e7 }));
-    if (searchParams.has('tag')) setProductTag(searchParams.get('tag') ?? 'prev');
+    if (searchParams.has('tag') && searchParams.get('tag') !== 'none')
+      setProductTag(searchParams.get('tag') ?? 'prev');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSubmit = useCallback(() => {
@@ -80,7 +83,7 @@ export default function DrawerFilter({ productTags }: { productTags: string[] })
           Filter
           <SlidersHorizontal className="ml-2 h-4 w-4 " />
         </DrawerTrigger>
-        <DrawerContent className="z-[70] ml-2 flex h-[100dvh] max-w-[95dvw] flex-col bg-white pb-6 dark:bg-black md:max-w-[40vw]">
+        <DrawerContent className="z-[70] ml-2 flex h-[100dvh] max-w-[95svw] flex-col bg-white pb-6 dark:bg-black md:max-w-[40vw]">
           <DrawerHeader className="flex flex-row items-center justify-between bg-orange-300 py-3 dark:bg-slate-800">
             Filters
             <DrawerClose>
