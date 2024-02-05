@@ -1,4 +1,3 @@
-import { ClerkProvider } from '@clerk/nextjs';
 import Navbar from 'components/layout/navbar';
 import LoadingDots from 'components/loading-dots';
 import { ThemeProvider } from 'components/theme-provider';
@@ -50,21 +49,19 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   //   }
   // };
   return (
-    <ClerkProvider>
-      <html lang="en" className={GeistSans.variable}>
-        <body className="bg-neutral-50 text-black selection:bg-teal-300 dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white">
-          <ThemeProvider attribute="class" defaultTheme="dark">
-            <NextTopLoader />
-            <Navbar />
-            <Suspense fallback={<LoadingDots className="text-lg text-orange-300" />}>
-              <main>
-                {children}
-                <Toaster />
-              </main>
-            </Suspense>
-          </ThemeProvider>
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en" className={GeistSans.variable}>
+      <body className="bg-neutral-50 text-black selection:bg-teal-300 dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white">
+        <ThemeProvider attribute="class" defaultTheme="dark">
+          <NextTopLoader />
+          <Navbar />
+          <Suspense fallback={<LoadingDots className="text-lg text-orange-300" />}>
+            <main>
+              {children}
+              <Toaster />
+            </main>
+          </Suspense>
+        </ThemeProvider>
+      </body>
+    </html>
   );
 }

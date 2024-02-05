@@ -20,7 +20,7 @@ import { ScrollArea } from 'components/ui/scroll-area';
 import { createUrl } from 'lib/utils';
 import { SlidersHorizontal, X } from 'lucide-react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 
 export default function DrawerFilter({ productTags }: { productTags: string[] }) {
   // const [jewelleryTypes, setJewelleryTypes] = React.useState(['Gold']);
@@ -35,15 +35,33 @@ export default function DrawerFilter({ productTags }: { productTags: string[] })
   //     setJewelleryTypes((prev) => prev.filter((jType) => jType !== type));
   // };
 
+  useEffect(() => {
+    if (searchParams.has('min'))
+      setPriceRange((prev) => ({ ...prev, min: Number(searchParams.get('min')) ?? 0 }));
+    if (searchParams.has('max'))
+      setPriceRange((prev) => ({ ...prev, max: Number(searchParams.get('max')) ?? 1e7 }));
+    if (searchParams.has('tag')) setProductTag(searchParams.get('tag') ?? 'prev');
+  }, []);
+
   const onSubmit = useCallback(() => {
     const params = new URLSearchParams(searchParams);
-    if (!params.has('min') || !params.has('max')) {
-      params.delete('min');
-      params.delete('max');
+    if (!params.has('min') && priceRange.min !== 0) {
       params.append('min', String(priceRange.min));
+    } else if (params.has('min') && priceRange.min !== Number(params.get('min'))) {
+      params.delete('min');
+      params.append('min', String(priceRange.min));
+    }
+
+    if (!params.has('max') && priceRange.max !== 1e7) {
+      params.append('max', String(priceRange.max));
+    } else if (params.has('max') && priceRange.max !== Number(params.get('max'))) {
+      params.delete('max');
       params.append('max', String(priceRange.max));
     }
-    if (!params.has('tag')) {
+
+    if (!params.has('tag') && productTag !== 'none') {
+      params.append('tag', productTag);
+    } else if (params.has('tag') && productTag !== params.get('tag')) {
       params.delete('tag');
       params.append('tag', productTag);
     }
@@ -62,7 +80,7 @@ export default function DrawerFilter({ productTags }: { productTags: string[] })
           Filter
           <SlidersHorizontal className="ml-2 h-4 w-4 " />
         </DrawerTrigger>
-        <DrawerContent className="z-[70] ml-2 flex h-[100dvh] max-w-[95svw] flex-col bg-white pb-6 dark:bg-black md:max-w-[40vw]">
+        <DrawerContent className="z-[70] ml-2 flex h-[100dvh] max-w-[95dvw] flex-col bg-white pb-6 dark:bg-black md:max-w-[40vw]">
           <DrawerHeader className="flex flex-row items-center justify-between bg-orange-300 py-3 dark:bg-slate-800">
             Filters
             <DrawerClose>
@@ -109,6 +127,7 @@ export default function DrawerFilter({ productTags }: { productTags: string[] })
                     className="mx-1"
                     type="number"
                     inputMode="numeric"
+                    value={priceRange.min}
                     onChange={(e) =>
                       setPriceRange((prev) => ({ ...prev, min: Number(e.target.value) }))
                     }
@@ -118,6 +137,7 @@ export default function DrawerFilter({ productTags }: { productTags: string[] })
                     className="mx-1"
                     type="number"
                     inputMode="numeric"
+                    value={priceRange.max}
                     onChange={(e) =>
                       setPriceRange((prev) => ({ ...prev, max: Number(e.target.value) }))
                     }
