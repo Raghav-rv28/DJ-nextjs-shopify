@@ -62,7 +62,7 @@ export default function DrawerFilter({ productTags }: { productTags: string[] })
           Filter
           <SlidersHorizontal className="ml-2 h-4 w-4 " />
         </DrawerTrigger>
-        <DrawerContent className="z-[70] ml-2 flex h-[100svh] max-w-[95svw] flex-col bg-white pb-6 dark:bg-black md:max-w-[40vw]">
+        <DrawerContent className="z-[70] ml-2 flex h-[100dvh] max-w-[95svw] flex-col bg-white pb-6 dark:bg-black md:max-w-[40vw]">
           <DrawerHeader className="flex flex-row items-center justify-between bg-orange-300 py-3 dark:bg-slate-800">
             Filters
             <DrawerClose>
@@ -112,7 +112,7 @@ export default function DrawerFilter({ productTags }: { productTags: string[] })
                     onChange={(e) =>
                       setPriceRange((prev) => ({ ...prev, min: Number(e.target.value) }))
                     }
-                    defaultValue={priceRange.min}
+                    placeholder={String(priceRange.min)}
                   />
                   <Input
                     className="mx-1"
@@ -121,7 +121,7 @@ export default function DrawerFilter({ productTags }: { productTags: string[] })
                     onChange={(e) =>
                       setPriceRange((prev) => ({ ...prev, max: Number(e.target.value) }))
                     }
-                    defaultValue={priceRange.max}
+                    placeholder={String(priceRange.max)}
                   />
                 </AccordionContent>
               </AccordionItem>
