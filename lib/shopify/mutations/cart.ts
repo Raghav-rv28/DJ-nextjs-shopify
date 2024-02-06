@@ -12,7 +12,7 @@ export const addToCartMutation = /* GraphQL */ `
 `;
 
 export const createCartMutationWOUser = /* GraphQL */ `
-  mutation createCart($lineItems: [CartLineInput!], $buyerIdentity: CartBuyerIdentityInput) {
+  mutation createCart($lineItems: [CartLineInput!]) {
     cartCreate(input: { lines: $lineItems }) {
       cart {
         ...cart

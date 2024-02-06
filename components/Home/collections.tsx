@@ -15,7 +15,7 @@ export default async function Collections() {
 
   return (
     <div className="my-8 flex w-full flex-col items-center justify-center text-center">
-      <h2 className="my-3 text-5xl text-orange-300">Shop By Collections</h2>
+      <h2 className="my-3 text-5xl text-accent">Shop By Collections</h2>
       <h3 className="mb-5 text-2xl">
         Browse through your favorite categories. We&apos;ve got them all!
       </h3>
@@ -24,8 +24,8 @@ export default async function Collections() {
           .filter((val) => val.image)
           .map((val) => (
             <Link key={val.handle} href={`${val.path}`}>
-              <Card className="group max-w-[svw] rounded-lg transition duration-100 hover:border-2 hover:border-orange-300">
-                <CardTitle className="my-4">{val.title}</CardTitle>
+              <Card className="group max-w-[svw] rounded-lg transition duration-100 hover:border-2 hover:border-accent">
+                <CardTitle className="my-4 text-secondary">{val.title}</CardTitle>
                 <CardContent>
                   <Image
                     className="rounded-lg group-hover:scale-105"

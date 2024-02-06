@@ -13,9 +13,9 @@ export default function Gender() {
           First-class jewelry for first-class Men, Women & Children.
         </p>
         <div className="mt-8 flex items-center justify-center">
-          <div className="h-1 w-16 bg-orange-300" />
-          <FlowerIcon className="mx-4 text-orange-300" />
-          <div className="h-1 w-16 bg-orange-300" />
+          <div className="h-1 w-16 bg-accent" />
+          <FlowerIcon className="mx-4 text-accent" />
+          <div className="h-1 w-16 bg-accent" />
         </div>
         <div className="mt-8 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
           <div className="group relative">
@@ -34,7 +34,7 @@ export default function Gender() {
             <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 transition-opacity group-hover:opacity-100">
               <h3 className="mt-4 text-2xl font-medium text-black dark:text-white">Men</h3>
               <p className="mt-2">
-                <Link className="text-orange-300 hover:text-orange-100" href="#">
+                <Link className="text-primary hover:text-secondary" href="#">
                   Explore More
                 </Link>
               </p>
@@ -56,7 +56,7 @@ export default function Gender() {
             <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 transition-opacity group-hover:opacity-100">
               <h3 className="mt-4 text-2xl font-medium text-black dark:text-white">Kids</h3>
               <p className="mt-2">
-                <Link className="text-orange-300 hover:text-orange-100" href="#">
+                <Link className="text-primary hover:text-secondary" href="#">
                   Explore More
                 </Link>
               </p>
@@ -78,7 +78,7 @@ export default function Gender() {
             <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 transition-opacity group-hover:opacity-100">
               <h3 className="mt-4 text-2xl font-medium text-black dark:text-white">Women</h3>
               <p className="mt-2">
-                <Link className="text-orange-300 hover:text-orange-100" href="#">
+                <Link className="text-primary hover:text-secondary" href="#">
                   Explore More
                 </Link>
               </p>

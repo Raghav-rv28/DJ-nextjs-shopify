@@ -120,7 +120,7 @@ export default function MobileMenu({
                                           href={component.path || '/'}
                                           className="group w-full "
                                         >
-                                          <li className=" rounded-md p-1 group-hover:border-2 group-hover:border-solid group-hover:border-orange-300 group-hover:text-orange-300">
+                                          <li className=" rounded-md p-1 group-hover:border-2 group-hover:border-solid group-hover:border-secondary group-hover:text-orange-300">
                                             {component.title}
                                           </li>
                                         </Link>
@@ -148,7 +148,7 @@ export default function MobileMenu({
                                           href={component.path || '/'}
                                           className="group w-full "
                                         >
-                                          <li className=" rounded-md p-1 group-hover:border-2 group-hover:border-solid group-hover:border-orange-300 group-hover:text-orange-300">
+                                          <li className=" rounded-md p-1 group-hover:border-2 group-hover:border-solid group-hover:border-secondary group-hover:text-orange-300">
                                             {component.title}
                                           </li>
                                         </Link>
@@ -176,7 +176,7 @@ export default function MobileMenu({
                                           href={component.path || '/'}
                                           className="group w-full "
                                         >
-                                          <li className=" rounded-md p-1 group-hover:border-2 group-hover:border-solid group-hover:border-orange-300 group-hover:text-orange-300">
+                                          <li className=" rounded-md p-1 group-hover:border-2 group-hover:border-solid group-hover:border-secondary group-hover:text-orange-300">
                                             {component.title}
                                           </li>
                                         </Link>
@@ -204,7 +204,7 @@ export default function MobileMenu({
                                           href={component.path || '/'}
                                           className="group w-full "
                                         >
-                                          <li className=" rounded-md p-1 group-hover:border-2 group-hover:border-solid group-hover:border-orange-300 group-hover:text-orange-300">
+                                          <li className=" rounded-md p-1 group-hover:border-2 group-hover:border-solid group-hover:border-secondary group-hover:text-orange-300">
                                             {component.title}
                                           </li>
                                         </Link>

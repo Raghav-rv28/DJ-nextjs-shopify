@@ -63,7 +63,7 @@ export default function Categories() {
                 </div>
                 <Image
                   src={category.url}
-                  className="overflow-hidden rounded-lg group-hover:scale-105 group-hover:border-2 group-hover:border-orange-300"
+                  className="overflow-hidden rounded-lg group-hover:scale-105 group-hover:border-2 group-hover:border-secondary"
                   width={450}
                   height={900}
                   alt={`Banner image for category ${category.title}`}

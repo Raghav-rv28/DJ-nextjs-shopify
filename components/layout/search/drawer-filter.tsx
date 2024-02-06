@@ -84,7 +84,7 @@ export default function DrawerFilter({ productTags }: { productTags: string[] })
           <SlidersHorizontal className="ml-2 h-4 w-4 " />
         </DrawerTrigger>
         <DrawerContent className="z-[70] ml-2 flex h-[100dvh] max-w-[95svw] flex-col bg-white pb-6 dark:bg-black md:max-w-[40vw]">
-          <DrawerHeader className="flex flex-row items-center justify-between bg-orange-300 py-3 dark:bg-slate-800">
+          <DrawerHeader className="flex flex-row items-center justify-between bg-accent py-3 dark:bg-slate-800">
             Filters
             <DrawerClose>
               <X className="p-1 hover:rounded-sm hover:border-2 hover:border-white" />

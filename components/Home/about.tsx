@@ -23,7 +23,7 @@ export default function About() {
             </p>
             <Link
               href="/pages/about-us"
-              className="rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-300 hover:border-transparent hover:bg-orange-400 hover:text-white"
+              className="rounded border border-secondary bg-transparent px-4 py-2 font-semibold text-primary hover:border-transparent hover:bg-accent hover:text-white"
             >
               Read More →
             </Link>
@@ -57,7 +57,7 @@ export default function About() {
         <div className="mt-8">
           <Link
             href="/pages/about-us"
-            className="mt-8 rounded border border-orange-500 bg-transparent px-4 py-2 font-semibold text-orange-300 hover:border-transparent hover:bg-orange-400 hover:text-white"
+            className="mt-8 rounded border border-secondary bg-transparent px-4 py-2 font-semibold text-primary hover:border-transparent hover:bg-accent hover:text-white"
           >
             Read More →
           </Link>
