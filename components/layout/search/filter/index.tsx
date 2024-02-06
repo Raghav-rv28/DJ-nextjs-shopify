@@ -20,10 +20,10 @@ export default function FilterList({ list, title }: { list: ListItem[]; title?: 
   return (
     <nav className="w-full">
       {title ? (
-        <h3 className="hidden text-xs text-neutral-500 dark:text-neutral-400 md:block">{title}</h3>
+        <h3 className="hidden text-xs text-accent dark:text-neutral-400 md:block">{title}</h3>
       ) : null}
       <ul className="hidden md:block">
-        <ScrollArea className="h-[350px] w-[300px] p-2">
+        <ScrollArea className="h-[300px] w-[300px] p-2">
           <FilterItemList list={list} />
         </ScrollArea>
       </ul>

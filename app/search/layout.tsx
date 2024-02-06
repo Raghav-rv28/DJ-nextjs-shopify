@@ -8,13 +8,11 @@ export default function SearchLayout({ children }: { children: React.ReactNode }
   return (
     <Suspense>
       <div className="max-w-screen-3xl mx-auto flex flex-col gap-8 px-10 pb-4 text-black dark:text-white md:flex-row">
-        <div className="order-none flex w-full justify-center md:max-w-[425px]">
+        <div className="flex w-full flex-col justify-start space-y-3 md:w-1/5">
+          <Collections />
           <FilterList list={sortingSearch} title="Sort by" />
         </div>
-        <div className="order-last flex min-h-screen w-full flex-col md:order-none">{children}</div>
-        <div className="order-none w-full  justify-center md:max-w-[425px]">
-          <Collections />
-        </div>
+        <div className="flex min-h-screen w-4/5 flex-col md:order-none">{children}</div>
       </div>
       <Footer />
     </Suspense>
