@@ -75,7 +75,7 @@ export default function SignInForm() {
 
   // Display a form to capture the user's email and password
   return (
-    <div className="mt-10 flex min-h-[50vh] w-full flex-col items-center justify-center">
+    <div className="mt-10 flex min-h-[50vh] w-full flex-col items-center justify-center rounded-lg bg-primary">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
           <FormField
@@ -104,8 +104,12 @@ export default function SignInForm() {
               </FormItem>
             )}
           />
-          <div className="flex justify-center pt-5">
-            <Button className="w-[75%]" type="submit" disabled={form.formState.isSubmitting}>
+          <div className="flex justify-center pt-5 ">
+            <Button
+              className="w-[75%] bg-accent"
+              type="submit"
+              disabled={form.formState.isSubmitting}
+            >
               {!form.formState.isSubmitting && <span>Login</span>}
               {form.formState.isSubmitting && <ImSpinner2 className="animate-spin" />}
             </Button>
