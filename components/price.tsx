@@ -11,7 +11,11 @@ const Price = ({
   currencyCode: string;
   currencyCodeClassName?: string;
 } & React.ComponentProps<'p'>) => (
-  <p suppressHydrationWarning={true} className={className}>
+  <p
+    suppressHydrationWarning={true}
+    className={className}
+    aria-label={`price of the product ${amount} ${currencyCode}`}
+  >
     {`${new Intl.NumberFormat(undefined, {
       style: 'currency',
       currency: currencyCode,
