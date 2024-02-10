@@ -75,7 +75,7 @@ export default function SignInForm() {
 
   // Display a form to capture the user's email and password
   return (
-    <div className="mt-10 flex min-h-[50vh] w-full flex-col items-center justify-center rounded-lg bg-primary">
+    <div className="mt-10 flex min-h-[50vh] w-full flex-col items-center justify-center rounded-lg bg-primary dark:bg-accent">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
           <FormField
@@ -106,7 +106,7 @@ export default function SignInForm() {
           />
           <div className="flex justify-center pt-5 ">
             <Button
-              className="w-[75%] bg-accent"
+              className="w-[75%] bg-accent dark:text-white hover:dark:text-black"
               type="submit"
               disabled={form.formState.isSubmitting}
             >

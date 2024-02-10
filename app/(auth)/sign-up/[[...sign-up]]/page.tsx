@@ -155,7 +155,7 @@ export default function Page() {
   // Once the sign-up form was submitted, verifying was set to true and as a result, this verification form is presented to the user to input their verification code.
   if (verifying) {
     return (
-      <div className="mt-10 flex min-h-[50vh] w-full flex-col items-center justify-center rounded-lg bg-primary">
+      <div className="mt-10 flex min-h-[50vh] w-full flex-col items-center justify-center rounded-lg bg-primary dark:bg-accent">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(handleVerify)} className="space-y-2">
             <FormField
@@ -200,7 +200,7 @@ export default function Page() {
 
   // Display the initial sign-up form to capture the email and password
   return (
-    <div className="mt-10 flex min-h-[50vh] w-full flex-col items-center justify-center rounded-lg bg-primary">
+    <div className="mt-10 flex min-h-[50vh] w-full flex-col items-center justify-center rounded-lg bg-primary dark:bg-accent">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
           <div className="flex flex-col flex-wrap justify-between md:flex-row ">
@@ -270,9 +270,9 @@ export default function Page() {
               </FormItem>
             )}
           />
-          <div className="flex justify-center pt-5 ">
+          <div className="flex justify-center pt-5">
             <Button
-              className="w-[75%] bg-accent"
+              className="w-[75%] bg-accent rounded-lg dark:text-white hover:dark:text-black"
               type="submit"
               disabled={form.formState.isSubmitting}
             >
@@ -283,7 +283,7 @@ export default function Page() {
         </form>
         <p className="m-5 w-full text-center text-base">
           Already have an Account?
-          <Link className="ml-2 rounded-md p-2 text-blue-400 hover:underline" href="/sign-in">
+          <Link className="ml-2 rounded-md p-2 text-blue-400 hover:underline " href="/sign-in">
             Login In
           </Link>
         </p>
