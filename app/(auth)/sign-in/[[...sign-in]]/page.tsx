@@ -106,7 +106,7 @@ export default function SignInForm() {
           />
           <div className="flex justify-center pt-5 ">
             <Button
-              className="w-[75%] bg-accent dark:text-white hover:dark:text-black"
+              className="w-[75%] bg-primary dark:bg-accent hover:dark:bg-white hover:bg-accent dark:text-white hover:dark:text-black"
               type="submit"
               disabled={form.formState.isSubmitting}
             >
