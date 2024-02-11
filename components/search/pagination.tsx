@@ -1,10 +1,10 @@
 "use client";
 import {
-    Pagination,
-    PaginationContent,
-    PaginationItem,
-    PaginationNext,
-    PaginationPrevious
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationNext,
+  PaginationPrevious
 } from 'components/ui/pagination';
 import { createUrl } from 'lib/utils';
 import { usePathname, useSearchParams } from 'next/navigation';
@@ -22,19 +22,26 @@ export default function PaginationComponent({
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  const params = new URLSearchParams(searchParams);
-  const beforeParams = params;
-  const afterParams = params;
-  if(params.has("after")) { 
+  const beforeParams = new URLSearchParams(searchParams);
+  const afterParams = new URLSearchParams(searchParams);
+  if(afterParams.has("after")) { 
+    console.log("im here");
     afterParams.delete('after');
     afterParams.append("after", pageInfo.endCursor);
-  } else if(!params.has("before") &&pageInfo.hasNextPage) { 
+  } else if(!afterParams.has("before") && pageInfo.hasNextPage) { 
+    afterParams.append("after", pageInfo.endCursor);
+  } else if(afterParams.has("before") && pageInfo.hasNextPage) { 
+    afterParams.delete("before");
     afterParams.append("after", pageInfo.endCursor);
   }
-  if(params.has("before")) { 
+
+  if(beforeParams.has("before")) { 
     beforeParams.delete('before');
     beforeParams.append("before", pageInfo.startCursor);
-  } else if(!params.has("after") && pageInfo.hasPreviousPage) { 
+  } else if(!beforeParams.has("after") && pageInfo.hasPreviousPage) { 
+    beforeParams.append("before", pageInfo.startCursor);
+  } else if(beforeParams.has("after") && pageInfo.hasPreviousPage) { 
+    beforeParams.delete("after");
     beforeParams.append("before", pageInfo.startCursor);
   }
   return (

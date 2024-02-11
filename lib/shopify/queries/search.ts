@@ -27,6 +27,7 @@ export const getSearchResultsQuery = /* GraphQL */ `
             ...product
           }
         }
+        cursor
       }
       pageInfo { 
         endCursor

@@ -557,6 +557,7 @@ export async function getSearchResults({
   query,
   reverse,
   first = 50,
+  last = 50,
   sortKey,
   after,
   before,
@@ -582,11 +583,12 @@ export async function getSearchResults({
 }> {
   let res;
   if (before !== undefined) {
+    console.log("executing before and last");
     res = await shopifyFetch<ShopifySearchOperation>({
       query: getSearchResultsQuery,
       variables: {
         query,
-        first,
+        last,
         reverse,
         sortKey,
         before,
@@ -594,6 +596,7 @@ export async function getSearchResults({
       }
     });
   } else {
+    console.log("executing after and first");
     res = await shopifyFetch<ShopifySearchOperation>({
       query: getSearchResultsQuery,
       variables: {
@@ -606,7 +609,7 @@ export async function getSearchResults({
       }
     });
   }
-
+ 
   return {
     products: reshapeProducts(removeEdgesAndNodes(res.body.data.search)),
     ...res.body.data.search

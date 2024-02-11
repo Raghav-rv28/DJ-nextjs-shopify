@@ -6,6 +6,7 @@ export type Connection<T> = {
 
 export type Edge<T> = {
   node: T;
+  cursor: string;
 };
 
 export type Cart = Omit<ShopifyCart, 'lines'> & {
