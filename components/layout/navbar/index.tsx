@@ -1,11 +1,8 @@
-import Cart from 'components/cart';
-import OpenCart from 'components/cart/open-cart';
 import ThemeSwitcher from 'components/layout/navbar/theme-switcher';
 import { Separator } from 'components/ui/separator';
 import { getCollections } from 'lib/shopify';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Suspense } from 'react';
 import Account from './account';
 import { CategoryMenu } from './category-menu';
 import MobileMenu from './mobile-menu';
@@ -58,13 +55,10 @@ export default async function Navbar() {
           <Search />
         </div>
         <div className="flex justify-end space-x-7 lg:mr-[5rem] lg:w-1/3">
-          <Suspense fallback={<OpenCart />}>
             <span className="hidden lg:flex">
               <ThemeSwitcher />
             </span>
             <Account />
-            <Cart />
-          </Suspense>
         </div>
       </div>
       <Separator />

@@ -556,8 +556,8 @@ export async function createCustomerFunction(props: createCustomerInput) {
 export async function getSearchResults({
   query,
   reverse,
-  first = 50,
-  last = 50,
+  first = 24,
+  last = 24,
   sortKey,
   after,
   before,
