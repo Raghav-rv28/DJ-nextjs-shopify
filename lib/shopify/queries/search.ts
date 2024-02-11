@@ -4,7 +4,9 @@ export const getSearchResultsQuery = /* GraphQL */ `
   query searchProducts(
     $query: String!
     $first: Int
+    $last: Int
     $after: String
+    $before: String
     $productFilters: [ProductFilter!]
     $sortKey: SearchSortKeys
     $reverse: Boolean
@@ -12,10 +14,12 @@ export const getSearchResultsQuery = /* GraphQL */ `
     search(
       query: $query
       first: $first
+      last: $last
       productFilters: $productFilters
       sortKey: $sortKey
       reverse: $reverse
       after: $after
+      before: $before
     ) {
       edges {
         node {

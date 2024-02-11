@@ -16,7 +16,7 @@ export default async function SearchPage({
 }: {
   searchParams?: { [key: string]: string | string[] | undefined };
 }) {
-  const { sort, q: searchValue, min, max, tag, after } = searchParams as { [key: string]: any };
+  const { sort, q: searchValue, min, max, tag, after, before } = searchParams as { [key: string]: any };
   const { sortKey, reverse } = sortingSearch.find((item) => item.slug === sort) || defaultSort;
   const productFilters = [];
 
@@ -37,6 +37,7 @@ export default async function SearchPage({
     productFilters,
     sortKey,
     after,
+    before
   });
   if (products.length === 0 && String(searchValue).length === 13) {
     products = await getProducts({ sortKey, reverse, query: searchValue });
@@ -46,14 +47,14 @@ export default async function SearchPage({
   return (
     <>
       <div className="flex w-full flex-col md:flex-row items-center justify-center p-1">
-        <div className="flex w-full justify-center md:justify-start items-center h-[50px] flex-row">
-          <DrawerFilter productTags={productTags} /> |&nbsp;
+        <div className="flex w-full flex-col justify-center md:justify-start items-center md:flex-row">
+          <DrawerFilter productTags={productTags} />
           {searchValue ? (
-            <p className="p-2mb-4 flex flex-row items-center justify-center">
+            <p className="p-2 mb-4 items-center justify-center overflow-hidden">
               {products.length === 0
-                ? 'There are no products that match with current set filters'
-                : `Showing ${totalCount} ${resultsText} for `}
-              <span className="font-bold">&quot;{searchValue}&quot;</span>
+                ? 'There are no products that match with current set filters for:'
+                : `Showing ${totalCount} ${resultsText} for:`}
+              <span className="font-bold">&nbsp;&quot;{searchValue}&quot;</span>
             </p>
           ) : null}
         </div>

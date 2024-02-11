@@ -559,21 +559,42 @@ export async function getSearchResults({
   first = 50,
   sortKey,
   after,
+  before,
   productFilters = []
 }: {
   query?: string;
   sortKey: string;
   first?: number;
+  last?: number;
   reverse: boolean;
-  after?:string;
+  after?: string;
+  before?: string;
   productFilters?: any;
-}): Promise<{products: Product[], pageInfo: {
-  endCursor: string,
-  hasNextPage: boolean,
-  hasPreviousPage: boolean,
-  startCursor: string,
-} , totalCount: number}> {
-  const res = await shopifyFetch<ShopifySearchOperation>({
+}): Promise<{
+  products: Product[];
+  pageInfo: {
+    endCursor: string;
+    hasNextPage: boolean;
+    hasPreviousPage: boolean;
+    startCursor: string;
+  };
+  totalCount: number;
+}> {
+  let res;
+  if (before !== undefined) {
+    res = await shopifyFetch<ShopifySearchOperation>({
+      query: getSearchResultsQuery,
+      variables: {
+        query,
+        first,
+        reverse,
+        sortKey,
+        before,
+        productFilters
+      }
+    });
+  } else {
+    res = await shopifyFetch<ShopifySearchOperation>({
       query: getSearchResultsQuery,
       variables: {
         query,
@@ -584,7 +605,12 @@ export async function getSearchResults({
         productFilters
       }
     });
-  return { products: reshapeProducts(removeEdgesAndNodes(res.body.data.search)), ...res.body.data.search };
+  }
+
+  return {
+    products: reshapeProducts(removeEdgesAndNodes(res.body.data.search)),
+    ...res.body.data.search
+  };
 }
 
 export async function getProductTags({ first }: { first: number }) {

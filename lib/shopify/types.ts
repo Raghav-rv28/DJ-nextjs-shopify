@@ -366,10 +366,12 @@ export type ShopifySearchOperation = {
   variables: {
     query?: string;
     sortKey: string;
-    first: number;
+    first?: number;
+    last?: number;
     reverse: boolean;
     productFilters?: any;
     after?: string;
+    before?: string;
   };
 };
 

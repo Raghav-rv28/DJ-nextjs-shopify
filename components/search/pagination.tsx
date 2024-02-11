@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import {
     Pagination,
     PaginationContent,
@@ -23,22 +23,29 @@ export default function PaginationComponent({
   const searchParams = useSearchParams()
 
   const params = new URLSearchParams(searchParams);
+  const beforeParams = params;
+  const afterParams = params;
   if(params.has("after")) { 
-    params.delete('after');
-    params.append("after", pageInfo.endCursor);
-  } else { 
-    
-    params.append("after", pageInfo.endCursor);
+    afterParams.delete('after');
+    afterParams.append("after", pageInfo.endCursor);
+  } else if(!params.has("before") &&pageInfo.hasNextPage) { 
+    afterParams.append("after", pageInfo.endCursor);
+  }
+  if(params.has("before")) { 
+    beforeParams.delete('before');
+    beforeParams.append("before", pageInfo.startCursor);
+  } else if(!params.has("after") && pageInfo.hasPreviousPage) { 
+    beforeParams.append("before", pageInfo.startCursor);
   }
   return (
     <div className="md:ml-2 flex justify-center items-center">
       <Pagination>
         <PaginationContent>
           <PaginationItem className='mr-5'>
-            <PaginationPrevious href='#' />
+            <PaginationPrevious href={createUrl(pathname,beforeParams)} />
           </PaginationItem>
           <PaginationItem>
-            <PaginationNext href={createUrl(pathname,params)} />
+            <PaginationNext href={createUrl(pathname,afterParams)} />
           </PaginationItem>
         </PaginationContent>
       </Pagination>
