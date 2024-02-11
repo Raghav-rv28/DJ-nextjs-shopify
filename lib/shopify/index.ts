@@ -558,26 +558,33 @@ export async function getSearchResults({
   reverse,
   first = 50,
   sortKey,
+  after,
   productFilters = []
 }: {
   query?: string;
   sortKey: string;
   first?: number;
   reverse: boolean;
+  after?:string;
   productFilters?: any;
-}): Promise<Product[]> {
-  console.log(reverse, sortKey);
+}): Promise<{products: Product[], pageInfo: {
+  endCursor: string,
+  hasNextPage: boolean,
+  hasPreviousPage: boolean,
+  startCursor: string,
+} , totalCount: number}> {
   const res = await shopifyFetch<ShopifySearchOperation>({
-    query: getSearchResultsQuery,
-    variables: {
-      query,
-      first,
-      reverse,
-      sortKey,
-      productFilters
-    }
-  });
-  return reshapeProducts(removeEdgesAndNodes(res.body.data.search));
+      query: getSearchResultsQuery,
+      variables: {
+        query,
+        first,
+        reverse,
+        sortKey,
+        after,
+        productFilters
+      }
+    });
+  return { products: reshapeProducts(removeEdgesAndNodes(res.body.data.search)), ...res.body.data.search };
 }
 
 export async function getProductTags({ first }: { first: number }) {

@@ -369,6 +369,7 @@ export type ShopifySearchOperation = {
     first: number;
     reverse: boolean;
     productFilters?: any;
+    after?: string;
   };
 };
 

@@ -1,6 +1,8 @@
+/* eslint-disable prefer-const */
 import Grid from 'components/grid';
 import ProductGridItems from 'components/layout/product-grid-items';
-import DrawerFilter from 'components/layout/search/drawer-filter';
+import DrawerFilter from 'components/search/drawer-filter';
+import PaginationComponent from 'components/search/pagination';
 import { defaultSort, sortingSearch } from 'lib/constants';
 import { getProductTags, getProducts, getSearchResults } from 'lib/shopify';
 
@@ -14,9 +16,8 @@ export default async function SearchPage({
 }: {
   searchParams?: { [key: string]: string | string[] | undefined };
 }) {
-  const { sort, q: searchValue, min, max, tag } = searchParams as { [key: string]: any };
+  const { sort, q: searchValue, min, max, tag, after } = searchParams as { [key: string]: any };
   const { sortKey, reverse } = sortingSearch.find((item) => item.slug === sort) || defaultSort;
-  let products;
   const productFilters = [];
 
   const productTags = await getProductTags({ first: 50 });
@@ -30,11 +31,12 @@ export default async function SearchPage({
     });
   }
 
-  products = await getSearchResults({
+  let { products, pageInfo, totalCount } = await getSearchResults({
     query: searchValue,
     reverse,
     productFilters,
-    sortKey
+    sortKey,
+    after,
   });
   if (products.length === 0 && String(searchValue).length === 13) {
     products = await getProducts({ sortKey, reverse, query: searchValue });
@@ -43,22 +45,30 @@ export default async function SearchPage({
   const resultsText = products.length > 1 ? 'results' : 'result';
   return (
     <>
-      <div className="flex w-full items-center justify-start p-1">
-        <DrawerFilter productTags={productTags} /> |&nbsp;&nbsp;
-        {searchValue ? (
-          <p className="p-2mb-4 flex flex-row items-center justify-center">
-            {products.length === 0
-              ? 'There are no products that match with current set filters'
-              : `Showing ${products.length} ${resultsText} for `}
-            <span className="font-bold">&quot;{searchValue}&quot;</span>
-          </p>
-        ) : null}
+      <div className="flex w-full flex-col md:flex-row items-center justify-center p-1">
+        <div className="flex w-full justify-center md:justify-start items-center h-[50px] flex-row">
+          <DrawerFilter productTags={productTags} /> |&nbsp;
+          {searchValue ? (
+            <p className="p-2mb-4 flex flex-row items-center justify-center">
+              {products.length === 0
+                ? 'There are no products that match with current set filters'
+                : `Showing ${totalCount} ${resultsText} for `}
+              <span className="font-bold">&quot;{searchValue}&quot;</span>
+            </p>
+          ) : null}
+        </div>
+        <div className="w-full">
+          <PaginationComponent pageInfo={pageInfo} />
+        </div>
       </div>
       {products.length > 0 ? (
-        <Grid className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <Grid className=" grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           <ProductGridItems products={products} />
         </Grid>
       ) : null}
+      <div className="w-full">
+          <PaginationComponent pageInfo={pageInfo} />
+        </div>
     </>
   );
 }
