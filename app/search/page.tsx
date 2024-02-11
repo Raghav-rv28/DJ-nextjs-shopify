@@ -16,7 +16,15 @@ export default async function SearchPage({
 }: {
   searchParams?: { [key: string]: string | string[] | undefined };
 }) {
-  const { sort, q: searchValue, min, max, tag, after, before } = searchParams as { [key: string]: any };
+  const {
+    sort,
+    q: searchValue,
+    min,
+    max,
+    tag,
+    after,
+    before
+  } = searchParams as { [key: string]: any };
   const { sortKey, reverse } = sortingSearch.find((item) => item.slug === sort) || defaultSort;
   const productFilters = [];
 
@@ -46,11 +54,11 @@ export default async function SearchPage({
   const resultsText = products.length > 1 ? 'results' : 'result';
   return (
     <>
-      <div className="flex w-full flex-col md:flex-row items-center justify-center p-1">
-        <div className="flex w-full flex-col justify-center md:justify-start items-center md:flex-row">
+      <div className="flex w-full flex-col items-center justify-center p-1 md:flex-row">
+        <div className="flex w-full flex-col items-center justify-center md:flex-row md:justify-start">
           <DrawerFilter productTags={productTags} />
           {searchValue ? (
-            <p className="p-2 mb-4 items-center justify-center overflow-hidden">
+            <p className="items-center justify-center overflow-hidden p-2">
               {products.length === 0
                 ? 'There are no products that match with current set filters for:'
                 : `Showing ${totalCount} ${resultsText} for:`}
@@ -67,9 +75,11 @@ export default async function SearchPage({
           <ProductGridItems products={products} />
         </Grid>
       ) : null}
-      <div className="w-full">
+      {products.length > 0 ? (
+        <div className="w-full">
           <PaginationComponent pageInfo={pageInfo} />
         </div>
+      ) : null}
     </>
   );
 }
