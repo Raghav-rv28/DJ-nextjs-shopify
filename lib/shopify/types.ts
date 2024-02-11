@@ -376,6 +376,19 @@ export type ShopifySearchOperation = {
   };
 };
 
+export type ShopifyPredictiveSearchOperation = {
+  data: {
+    predictiveSearch: {
+      queries: any[],
+      collections: any[],
+      products: any[],
+    }
+  };
+  variables: {
+    query?: string;
+  };
+};
+
 export type ShopifyProductTagsRetrieveOperation = {
   data: {
     productTags: { edges: { node: string; cursor: string }[] };

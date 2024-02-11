@@ -25,7 +25,7 @@ export default async function Account() {
           <AvatarFallback>DJ</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="z-[70] w-56">
+      <DropdownMenuContent className="z-[70] w-56 mx-2">
         <div className="m-1 mt-0 flex justify-between">
         <Suspense fallback={<OpenCart />}>
             <Cart />

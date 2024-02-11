@@ -4,7 +4,7 @@ import ProductGridItems from 'components/layout/product-grid-items';
 import DrawerFilter from 'components/search/drawer-filter';
 import PaginationComponent from 'components/search/pagination';
 import { defaultSort, sortingSearch } from 'lib/constants';
-import { getProductTags, getProducts, getSearchResults } from 'lib/shopify';
+import { getPredictiveSearch, getProductTags, getProducts, getSearchResults } from 'lib/shopify';
 
 export const metadata = {
   title: 'Search',
@@ -47,6 +47,7 @@ export default async function SearchPage({
     after,
     before
   });
+  await getPredictiveSearch({query: searchValue})
   if (products.length === 0 && String(searchValue).length === 13) {
     products = await getProducts({ sortKey, reverse, query: searchValue });
   }

@@ -30,7 +30,7 @@ import {
   getProductTagsQuery,
   getProductsQuery
 } from './queries/product';
-import { getSearchResultsQuery } from './queries/search';
+import { getPredictiveSearchResultsQuery, getSearchResultsQuery } from './queries/search';
 import {
   Cart,
   Collection,
@@ -53,6 +53,7 @@ import {
   ShopifyMenuOperation,
   ShopifyPageOperation,
   ShopifyPagesOperation,
+  ShopifyPredictiveSearchOperation,
   ShopifyProduct,
   ShopifyProductOperation,
   ShopifyProductRecommendationsOperation,
@@ -614,6 +615,16 @@ export async function getSearchResults({
     products: reshapeProducts(removeEdgesAndNodes(res.body.data.search)),
     ...res.body.data.search
   };
+}
+
+export async function getPredictiveSearch({query}: {query: string}){ 
+  const res = await shopifyFetch<ShopifyPredictiveSearchOperation>({
+    query: getPredictiveSearchResultsQuery,
+    variables: {
+      query,
+    }
+  });
+  console.log(res.body.data.predictiveSearch.products)
 }
 
 export async function getProductTags({ first }: { first: number }) {
