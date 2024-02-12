@@ -13,7 +13,7 @@
     --popover: 37 86% 92%;
     --popover-foreground: 181 100% 29%;
 
-    --primary: 37 85% 55%; /* #eea32b */
+    --primary: 37 86% 92%; /* #eea32b */
     --primary-foreground: 210 40% 98%;
 
     --secondary: 208 54% 22%;
@@ -39,7 +39,7 @@
     --background: 240 3% 13%;
     --foreground: 37 85% 55%;
 
-    --card: 240 3% 13%;
+    --card: 208 54% 22%;
     --card-foreground: 37 85% 55%;
 
     --popover: 240 3% 13%;

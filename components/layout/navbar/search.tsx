@@ -8,10 +8,11 @@ import { getPredictiveSearch } from 'lib/shopify';
 import { createUrl } from 'lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 
 export default function Search() {
+  const pathname = usePathname();
   const searchParams = useSearchParams();
   const [query, setQuery] = useState(searchParams?.get('q') ?? '');
   const [predictiveResults, setPredictiveResults] = useState<{
@@ -60,86 +61,102 @@ export default function Search() {
           <MagnifyingGlassIcon className="h-4" />
         </div>
       </form>
-      {query && (
+      {predictiveResults?.queries !== undefined && (
         <ScrollArea className="h-[80vh] md:hidden">
           <div className="flex flex-col justify-center">
-            <h2 className="my-2 w-full text-center text-lg font-bold">Popular Searches</h2>
-            <div className="my-2 flex flex-row flex-wrap items-center justify-center gap-1">
-              {predictiveResults?.queries.map((value) => {
-                return (
-                  <Link
-                    key={value.text}
-                    href={`/search?q=${value.text}`}
-                    className="flex flex-row items-center justify-center rounded-full bg-primary p-2 py-0 text-base text-accent"
-                  >
-                    {value.text}
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      height="1rem"
-                      width="1rem"
-                      className="m-1 h-full translate-y-1"
-                    >
-                      <path d="M10 10.414l4 4 5.707-5.707L22 11V5h-6l2.293 2.293L14 11.586l-4-4-7.707 7.707 1.414 1.414z" />
-                    </svg>
-                  </Link>
-                );
-              })}
-            </div>
-            <Separator />
-            <div className="my-2 flex flex-row flex-wrap items-center justify-center gap-1">
-              <h2 className="w-full text-center text-lg font-bold">Products</h2>
-              {predictiveResults?.products.map((product) => {
-                return (
-                  <Card
-                    key={product.id}
-                    className="max-w-[150px] overflow-hidden rounded-lg bg-primary text-accent shadow-md"
-                  >
-                    <Image
-                      alt={product.title}
-                      className="h-[125px] w-[150px] object-cover"
-                      height={product.featuredImage.height}
-                      src={product.featuredImage.url}
-                      style={{
-                        objectFit: 'cover'
-                      }}
-                      width={product.featuredImage.width}
-                    />
-                    <CardContent className="m-2 flex w-full items-center justify-center p-2 pl-0">
-                      <h3 className="whitespace-normal text-base font-semibold">{product.title}</h3>
-                    </CardContent>
-                  </Card>
-                );
-              })}
-            </div>
-            <Separator />
-            <div className="my-2 flex flex-row flex-wrap items-center justify-center gap-1">
-              <h2 className="w-full text-center text-lg font-bold">Collections</h2>
-              {predictiveResults?.collections.map((collection) => {
-                return (
-                  <Card
-                    key={collection.id}
-                    className="max-w-[150px] overflow-hidden rounded-lg bg-primary text-accent shadow-md"
-                  >
-                    <Image
-                      alt={collection.title}
-                      className="h-[125px] w-[150px] object-cover text-center"
-                      height={collection.image?.height}
-                      src={collection.image?.url}
-                      style={{
-                        objectFit: 'cover'
-                      }}
-                      width={collection.image?.width}
-                    />
-                    <CardContent className="m-2 flex w-full items-center justify-center p-2 pl-0">
-                      <h3 className="whitespace-normal text-base font-semibold">
-                        {collection.title}
-                      </h3>
-                    </CardContent>
-                  </Card>
-                );
-              })}
-            </div>
+            {predictiveResults?.queries !== undefined && (
+              <>
+                <h2 className="my-2 w-full text-center text-lg font-bold">Popular Searches</h2>
+                <div className="my-2 flex flex-row flex-wrap items-center justify-center gap-1">
+                  {predictiveResults?.queries.map((value) => {
+                    const newParams = new URLSearchParams();
+                    newParams.set('q', value.text);
+                    return (
+                      <Link
+                        key={value.text}
+                        href={createUrl(pathname, newParams)}
+                        className="flex flex-row items-center justify-center rounded-full bg-primary p-2 py-0 text-base text-accent"
+                      >
+                        {value.text}
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                          height="1rem"
+                          width="1rem"
+                          className="m-1 h-full translate-y-1"
+                        >
+                          <path d="M10 10.414l4 4 5.707-5.707L22 11V5h-6l2.293 2.293L14 11.586l-4-4-7.707 7.707 1.414 1.414z" />
+                        </svg>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </>
+            )}
+            {predictiveResults?.products !== undefined && (
+              <>
+                <Separator />
+                <div className="my-2 flex flex-row flex-wrap items-center justify-center gap-1">
+                  <h2 className="w-full text-center text-lg font-bold">Products</h2>
+                  {predictiveResults?.products.map((product) => {
+                    return (
+                      <Card
+                        key={product.id}
+                        className="max-w-[150px] overflow-hidden rounded-lg bg-primary text-accent shadow-md"
+                      >
+                        <Image
+                          alt={product.title}
+                          className="h-[125px] w-[150px] object-cover"
+                          height={product.featuredImage.height}
+                          src={product.featuredImage.url}
+                          style={{
+                            objectFit: 'cover'
+                          }}
+                          width={product.featuredImage.width}
+                        />
+                        <CardContent className="m-2 flex w-full items-center justify-center p-2 pl-0">
+                          <h3 className="whitespace-normal text-base font-semibold">
+                            {product.title}
+                          </h3>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
+                </div>
+              </>
+            )}
+            {predictiveResults?.collections !== undefined && (
+              <>
+                <Separator />
+                <div className="my-2 flex flex-row flex-wrap items-center justify-center gap-1">
+                  <h2 className="w-full text-center text-lg font-bold">Collections</h2>
+                  {predictiveResults?.collections.map((collection) => {
+                    return (
+                      <Card
+                        key={collection.id}
+                        className="max-w-[150px] overflow-hidden rounded-lg bg-primary text-accent shadow-md"
+                      >
+                        <Image
+                          alt={collection.title}
+                          className="h-[125px] w-[150px] object-cover text-center"
+                          height={collection.image?.height}
+                          src={collection.image?.url}
+                          style={{
+                            objectFit: 'cover'
+                          }}
+                          width={collection.image?.width}
+                        />
+                        <CardContent className="m-2 flex w-full items-center justify-center p-2 pl-0">
+                          <h3 className="whitespace-normal text-base font-semibold">
+                            {collection.title}
+                          </h3>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
+                </div>
+              </>
+            )}
           </div>
         </ScrollArea>
       )}
