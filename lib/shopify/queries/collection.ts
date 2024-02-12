@@ -1,7 +1,7 @@
 import productFragment from '../fragments/product';
 import seoFragment from '../fragments/seo';
 
-const collectionFragment = /* GraphQL */ `
+export const collectionFragment = /* GraphQL */ `
   fragment collection on Collection {
     handle
     title

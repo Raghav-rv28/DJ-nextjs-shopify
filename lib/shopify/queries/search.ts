@@ -1,3 +1,4 @@
+import imageFragment from '../fragments/image';
 import productFragment from '../fragments/product';
 
 export const getSearchResultsQuery = /* GraphQL */ `
@@ -29,7 +30,7 @@ export const getSearchResultsQuery = /* GraphQL */ `
         }
         cursor
       }
-      pageInfo { 
+      pageInfo {
         endCursor
         hasNextPage
         hasPreviousPage
@@ -42,17 +43,42 @@ export const getSearchResultsQuery = /* GraphQL */ `
 `;
 
 export const getPredictiveSearchResultsQuery = /* GraphQL */ `
-query suggestions($query: String!) {
-  predictiveSearch(query: $query, limitScope: EACH) {
-    queries {
-      text
-    }
-    collections {
-      id
-    }
-    products {
-      id
+  query suggestions($query: String!) {
+    predictiveSearch(query: $query, limitScope: EACH, limit: 5) {
+      queries {
+        text
+      }
+      collections {
+        handle
+        title
+        description
+        image {
+          height
+          width
+          altText
+          url
+        }
+      }
+      products {
+        handle
+        availableForSale
+        title
+        description
+        featuredImage {
+          ...image
+        }
+        priceRange {
+          maxVariantPrice {
+            amount
+            currencyCode
+          }
+          minVariantPrice {
+            amount
+            currencyCode
+          }
+        }
+      }
     }
   }
-}
+  ${imageFragment}
 `;

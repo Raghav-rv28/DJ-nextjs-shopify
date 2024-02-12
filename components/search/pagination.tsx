@@ -50,10 +50,10 @@ export default function PaginationComponent({
       <Pagination>
         <PaginationContent>
           <PaginationItem className='mr-5'>
-            <PaginationPrevious className={clsx("", pageInfo.hasPreviousPage ? "" : "hover:bg-transparent hover:text-black dark:hover:text-white hover:cursor-not-allowed")} href={createUrl(pathname,beforeParams)} />
+            <PaginationPrevious className={clsx("", pageInfo.hasPreviousPage ? "" : "hover:bg-transparent pointer-events-none hover:text-black dark:hover:text-white hover:cursor-not-allowed")} href={createUrl(pathname,beforeParams)} />
           </PaginationItem>
           <PaginationItem>
-            <PaginationNext  className={clsx("", pageInfo.hasNextPage ? "" : "hover:bg-transparent hover:text-black dark:hover:text-white  hover:cursor-not-allowed")} href={createUrl(pathname,afterParams)} />
+            <PaginationNext  className={clsx("", pageInfo.hasNextPage ? "" : "hover:bg-transparent pointer-events-none hover:text-black dark:hover:text-white  hover:cursor-not-allowed")} href={createUrl(pathname,afterParams)} />
           </PaginationItem>
         </PaginationContent>
       </Pagination>

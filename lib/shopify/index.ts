@@ -624,7 +624,7 @@ export async function getPredictiveSearch({query}: {query: string}){
       query,
     }
   });
-  console.log(res.body.data.predictiveSearch.products)
+  return res.body.data?.predictiveSearch;
 }
 
 export async function getProductTags({ first }: { first: number }) {
