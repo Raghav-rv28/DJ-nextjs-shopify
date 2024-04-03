@@ -551,6 +551,7 @@ export async function createCustomerFunction(props: createCustomerInput) {
     query: createCustomer,
     variables: { input: props }
   });
+  debugger;
   return req.body.data;
 }
 
@@ -584,7 +585,7 @@ export async function getSearchResults({
 }> {
   let res;
   if (before !== undefined) {
-    console.log("executing before and last");
+    console.log('executing before and last');
     res = await shopifyFetch<ShopifySearchOperation>({
       query: getSearchResultsQuery,
       variables: {
@@ -597,7 +598,7 @@ export async function getSearchResults({
       }
     });
   } else {
-    console.log("executing after and first");
+    console.log('executing after and first');
     res = await shopifyFetch<ShopifySearchOperation>({
       query: getSearchResultsQuery,
       variables: {
@@ -610,18 +611,18 @@ export async function getSearchResults({
       }
     });
   }
- 
+
   return {
     products: reshapeProducts(removeEdgesAndNodes(res.body.data.search)),
     ...res.body.data.search
   };
 }
 
-export async function getPredictiveSearch({query}: {query: string}){ 
+export async function getPredictiveSearch({ query }: { query: string }) {
   const res = await shopifyFetch<ShopifyPredictiveSearchOperation>({
     query: getPredictiveSearchResultsQuery,
     variables: {
-      query,
+      query
     }
   });
   return res.body.data?.predictiveSearch;

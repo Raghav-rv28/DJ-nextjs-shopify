@@ -25,12 +25,14 @@ export default async function Account() {
           <AvatarFallback>DJ</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="z-[70] w-56 mx-2">
+      <DropdownMenuContent className="z-[70] mx-2 w-56">
         <div className="m-1 mt-0 flex justify-between">
-        <Suspense fallback={<OpenCart />}>
+          <Suspense fallback={<OpenCart />}>
             <Cart />
           </Suspense>
-          <div className='md:hidden'><ThemeSwitcher /></div>
+          <div className="md:hidden">
+            <ThemeSwitcher />
+          </div>
         </div>
         <DropdownMenuSeparator />
         {/* NAVIGATION */}
@@ -47,6 +49,13 @@ export default async function Account() {
           </SignedIn>
           <SignedOut>
             <Link href={'/sign-in'}>Login</Link>
+          </SignedOut>
+        </DropdownMenuItem>
+
+        {/* PROFILE */}
+        <DropdownMenuItem>
+          <SignedOut>
+            <Link href={'/profile/raghav'}>Profile </Link>
           </SignedOut>
         </DropdownMenuItem>
         <SignedOut>
