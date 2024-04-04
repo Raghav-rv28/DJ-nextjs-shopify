@@ -222,14 +222,18 @@ export async function createCart(): Promise<Cart | undefined> {
   const user = await currentUser();
   let userDetails = undefined;
   console.log(`USER IN CREATE CART: ${user}`);
-  if (user !== null) {
-    userDetails = await prisma.user.findUnique({
-      where: {
-        email: user.emailAddresses[0]?.emailAddress
-      }
-    });
+
+  try {
+    if (user !== null) {
+      userDetails = await prisma.user.findUnique({
+        where: {
+          email: user.emailAddresses[0]?.emailAddress
+        }
+      });
+    }
+  } catch (err) {
+    console.log('Error while retrieving user info from Database');
   }
-  console.log(`IN CART: ${userDetails?.accessToken}`);
   let res;
   if (userDetails?.accessToken !== undefined && user !== null) {
     res = await shopifyFetch<ShopifyCreateCartOperationWUser>({
@@ -244,6 +248,7 @@ export async function createCart(): Promise<Cart | undefined> {
       cache: 'no-store'
     });
   } else {
+    console.log('no user found! checking out as is');
     res = await shopifyFetch<ShopifyCreateCartOperationWOUser>({
       query: createCartMutationWOUser,
       cache: 'no-store'
@@ -514,21 +519,19 @@ export async function updateCustomerAccessToken({
   email,
   password
 }: CustomerAccessTokenCreateInput) {
-  console.log('entering updateCustomer');
+  console.log('fetching access token using email and password');
   const returnedData = await shopifyFetch<CustomerAccessTokenOperation>({
     query: customerAccessTokenCreate,
     variables: {
       input: { email, password }
     }
   });
-  console.log(
-    `creating customer token using shopify API : ${JSON.stringify(returnedData.body.data)}`
-  );
   if (returnedData !== undefined) {
     const { accessToken, expiresAt } =
       returnedData.body.data.customerAccessTokenCreate.customerAccessToken;
     let userUpdated;
     try {
+      console.log('test');
       const prisma = new PrismaClient();
       userUpdated = await prisma.user.update({
         where: {

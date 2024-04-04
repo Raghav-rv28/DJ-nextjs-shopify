@@ -7,6 +7,9 @@ import Account from './account';
 import { CategoryMenu } from './category-menu';
 import MobileMenu from './mobile-menu';
 import Search from './search';
+import { Suspense } from 'react';
+import Cart from 'components/cart';
+import OpenCart from 'components/cart/open-cart';
 
 export default async function Navbar() {
   const goldCollections = await getCollections('title:Gold');
@@ -55,10 +58,13 @@ export default async function Navbar() {
           <Search />
         </div>
         <div className="flex justify-end space-x-7 lg:mr-[5rem] lg:w-1/3">
-            <span className="hidden lg:flex">
-              <ThemeSwitcher />
-            </span>
-            <Account />
+          <span className="hidden lg:flex">
+            <ThemeSwitcher />
+          </span>
+          <Account />
+          <Suspense fallback={<OpenCart />}>
+            <Cart />
+          </Suspense>
         </div>
       </div>
       <Separator />
