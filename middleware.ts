@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { authMiddleware } from '@clerk/nextjs';
 
 // This example protects all routes including api/trpc routes
@@ -5,7 +6,7 @@ import { authMiddleware } from '@clerk/nextjs';
 // See https://clerk.com/docs/references/nextjs/auth-middleware for more information about configuring your Middleware
 export default authMiddleware({
   debug: false,
-  publicRoutes: () => true
+  publicRoutes: (req) => true
 });
 
 export const config = {
