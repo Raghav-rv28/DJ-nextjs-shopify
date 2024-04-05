@@ -61,4 +61,4 @@ analyze build bundle : npx cross-env ANALYZE=true pnpm build
 
 ## TODO
 
-1. Remove Clerk.
+1. Replace prisma with DynamoDB.
