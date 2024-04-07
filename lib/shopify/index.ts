@@ -68,7 +68,6 @@ import {
   createCustomerOperation
 } from './types';
 import { CustomerQuery } from './queries/customer';
-import fs from 'fs';
 
 const domain = process.env.SHOPIFY_STORE_DOMAIN
   ? ensureStartsWith(process.env.SHOPIFY_STORE_DOMAIN, 'https://')
@@ -510,12 +509,12 @@ export async function getProducts({
   return reshapeProducts(removeEdgesAndNodes(res.body.data.products));
 }
 
-function writeToLogFile(log: string) {
-  const timestamp = new Date().toISOString();
-  const logMessage = `${timestamp}: ${log}\n`;
-  // Append the log to a file named 'logs.txt' in the 'logs' directory
-  fs.appendFileSync('./logs.txt', logMessage);
-}
+// function writeToLogFile(log: string) {
+//   const timestamp = new Date().toISOString();
+//   const logMessage = `${timestamp}: ${log}\n`;
+//   // Append the log to a file named 'logs.txt' in the 'logs' directory
+//   fs.appendFileSync('./logs.txt', logMessage);
+// }
 
 // MY OWN MAGIC
 /**
@@ -541,7 +540,7 @@ export async function updateCustomerAccessToken({
     const { accessToken, expiresAt } =
       returnedData.body.data.customerAccessTokenCreate.customerAccessToken;
     console.log(accessToken);
-    writeToLogFile(accessToken);
+    // writeToLogFile(accessToken);
     let userUpdated;
     try {
       console.log('test');
