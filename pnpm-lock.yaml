@@ -21,8 +21,8 @@ dependencies:
     specifier: ^14.1.0
     version: 14.1.0
   '@prisma/client':
-    specifier: 5.8.1
-    version: 5.8.1(prisma@5.8.1)
+    specifier: 5.12.1
+    version: 5.12.1(prisma@5.8.1)
   '@radix-ui/react-accordion':
     specifier: ^1.1.2
     version: 1.1.2(@types/react-dom@18.2.14)(@types/react@18.2.33)(react-dom@18.2.0)(react@18.2.0)
@@ -702,8 +702,8 @@ packages:
     resolution: {integrity: sha512-2LuNTFBIO0m7kKIQvvPHN6UE63VjpmL9rnEEaOOaiSPbZK+zUOYIzBAWcED+3XYzhYsd/0mD57VdxAEqqV52CQ==}
     dev: false
 
-  /@prisma/client@5.8.1(prisma@5.8.1):
-    resolution: {integrity: sha512-xQtMPfbIwLlbm0VVIVQY2yqQVOxPwRQhvIp7Z3m2900g1bu/zRHKhYZJQWELqmjl6d8YwBy0K2NvMqh47v1ubw==}
+  /@prisma/client@5.12.1(prisma@5.8.1):
+    resolution: {integrity: sha512-6/JnizEdlSBxDIdiLbrBdMW5NqDxOmhXAJaNXiPpgzAPr/nLZResT6MMpbOHLo5yAbQ1Vv5UU8PTPRzb0WIxdA==}
     engines: {node: '>=16.13'}
     requiresBuild: true
     peerDependencies:

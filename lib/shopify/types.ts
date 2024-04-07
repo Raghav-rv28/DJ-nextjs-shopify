@@ -379,10 +379,10 @@ export type ShopifySearchOperation = {
 export type ShopifyPredictiveSearchOperation = {
   data: {
     predictiveSearch: {
-      queries: any[],
-      collections: any[],
-      products: any[],
-    }
+      queries: any[];
+      collections: any[];
+      products: any[];
+    };
   };
   variables: {
     query?: string;
@@ -395,5 +395,12 @@ export type ShopifyProductTagsRetrieveOperation = {
   };
   variables: {
     first: number;
+  };
+};
+
+export type CustomerDataRetrieveOperation = {
+  data: any;
+  variables: {
+    token: string;
   };
 };

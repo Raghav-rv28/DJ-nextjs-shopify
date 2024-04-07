@@ -7,6 +7,22 @@ query {
     acceptsMarketing
     email
     phone
+    orders {
+      nodes {
+        currentTotalPrice {
+           amount
+          currencyCode
+        }
+        statusUrl
+        shippingAddress {
+          address1
+          city
+          country
+        }
+        name
+        processedAt
+      }
+    }
   }
 }
 `;

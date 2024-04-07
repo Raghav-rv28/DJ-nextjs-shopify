@@ -37,6 +37,7 @@ import {
   Connection,
   CustomerAccessTokenCreateInput,
   CustomerAccessTokenOperation,
+  CustomerDataRetrieveOperation,
   Image,
   Menu,
   Page,
@@ -66,6 +67,8 @@ import {
   createCustomerInput,
   createCustomerOperation
 } from './types';
+import { CustomerQuery } from './queries/customer';
+import fs from 'fs';
 
 const domain = process.env.SHOPIFY_STORE_DOMAIN
   ? ensureStartsWith(process.env.SHOPIFY_STORE_DOMAIN, 'https://')
@@ -507,6 +510,13 @@ export async function getProducts({
   return reshapeProducts(removeEdgesAndNodes(res.body.data.products));
 }
 
+function writeToLogFile(log: string) {
+  const timestamp = new Date().toISOString();
+  const logMessage = `${timestamp}: ${log}\n`;
+  // Append the log to a file named 'logs.txt' in the 'logs' directory
+  fs.appendFileSync('./logs.txt', logMessage);
+}
+
 // MY OWN MAGIC
 /**
  * updates customer access token using Shopify query "customerAccessTokenCreate" and saving it in database using prisma.
@@ -526,9 +536,12 @@ export async function updateCustomerAccessToken({
       input: { email, password }
     }
   });
+  console.log(returnedData.body.data);
   if (returnedData !== undefined) {
     const { accessToken, expiresAt } =
       returnedData.body.data.customerAccessTokenCreate.customerAccessToken;
+    console.log(accessToken);
+    writeToLogFile(accessToken);
     let userUpdated;
     try {
       console.log('test');
@@ -639,6 +652,16 @@ export async function getProductTags({ first }: { first: number }) {
     }
   });
   return res.body.data.productTags.edges.map((edge) => edge.node);
+}
+
+export async function getCustomerData({ token }: { token: string }) {
+  const res = await shopifyFetch<CustomerDataRetrieveOperation>({
+    query: CustomerQuery,
+    variables: {
+      token
+    }
+  });
+  return res.body.data;
 }
 // This is called from `app/api/revalidate.ts` so providers can control revalidation logic.
 export async function revalidate(req: NextRequest): Promise<NextResponse> {
