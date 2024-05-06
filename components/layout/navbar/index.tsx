@@ -58,7 +58,7 @@ export default async function Navbar() {
           <Search />
         </div>
         <div className="flex justify-end space-x-7 lg:mr-[5rem] lg:w-1/3">
-          <span className="hidden lg:flex">
+          <span className="hidden md:flex">
             <ThemeSwitcher />
           </span>
           <Account />
