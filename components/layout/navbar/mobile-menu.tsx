@@ -13,7 +13,6 @@ import {
   AccordionItem,
   AccordionTrigger
 } from '../../../components/ui/accordion';
-import Search from './search';
 
 export default function MobileMenu({
   goldCategories,
@@ -87,9 +86,6 @@ export default function MobileMenu({
                   <XMarkIcon className="h-6" />
                 </button>
 
-                <div className="mb-4 w-full">
-                  <Search />
-                </div>
                 <ul className="flex w-full flex-col">
                   <li className="py-2 text-xl text-black transition-colors hover:text-neutral-500 dark:text-white">
                     <Link href={'/'} onClick={closeMobileMenu}>

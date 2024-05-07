@@ -25,7 +25,9 @@ export default async function Collections() {
           .map((val) => (
             <Link key={val.handle} href={`${val.path}`} className="min-h-[300px] min-w-[300px]">
               <Card className="group max-w-[svw] rounded-lg transition duration-100 hover:border-2 hover:border-accent">
-                <CardTitle className="my-4 text-white">{val.title}</CardTitle>
+                <CardTitle className="text- my-4 text-accent dark:text-white">
+                  {val.title}
+                </CardTitle>
                 <CardContent>
                   <Image
                     className="rounded-lg group-hover:scale-105"
@@ -52,7 +54,7 @@ export default async function Collections() {
                 >
                   <Link key={val.handle} href={`${val.path}`}>
                     <Card className="group max-w-[svw] rounded-lg transition duration-1000">
-                      <CardTitle className="my-4">{val.title}</CardTitle>
+                      <CardTitle className="my-4 dark:text-black">{val.title}</CardTitle>
                       <CardContent>
                         <Image
                           className="rounded-lg group-hover:scale-105"
