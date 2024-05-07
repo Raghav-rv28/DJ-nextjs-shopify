@@ -62,7 +62,7 @@ export default function Search() {
         </div>
       </form>
       {predictiveResults?.queries !== undefined && (
-        <ScrollArea className="h-[80vh] md:hidden">
+        <ScrollArea className="h-[80vh] lg:hidden">
           <div className="flex flex-col justify-center">
             {predictiveResults?.queries !== undefined && (
               <>
